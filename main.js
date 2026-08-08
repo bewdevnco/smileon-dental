@@ -1,0 +1,370 @@
+/* ==========================================================================
+   SmileOn Complete Dental Care - Interactive Application Engine
+   Updated with Light/Dark Mode Toggle & Scroll Reveal Animations
+   ========================================================================== */
+
+document.addEventListener('DOMContentLoaded', () => {
+
+  // --- 1. Light & Dark Theme Toggle System ---
+  const themeToggleBtn = document.getElementById('themeToggleBtn');
+  const themeToggleIcon = document.getElementById('themeToggleIcon');
+
+  function applyTheme(theme) {
+    document.documentElement.setAttribute('data-theme', theme);
+    localStorage.setItem('smileon-theme', theme);
+
+    if (themeToggleIcon) {
+      if (theme === 'light') {
+        themeToggleIcon.className = 'fa-solid fa-moon';
+        themeToggleBtn.setAttribute('title', 'Switch to Dark Mode');
+      } else {
+        themeToggleIcon.className = 'fa-solid fa-sun';
+        themeToggleBtn.setAttribute('title', 'Switch to Light Mode');
+      }
+    }
+  }
+
+  // Load saved theme or default to dark
+  const savedTheme = localStorage.getItem('smileon-theme') || 'dark';
+  applyTheme(savedTheme);
+
+  if (themeToggleBtn) {
+    themeToggleBtn.addEventListener('click', () => {
+      const currentTheme = document.documentElement.getAttribute('data-theme') || 'dark';
+      const nextTheme = currentTheme === 'dark' ? 'light' : 'dark';
+      applyTheme(nextTheme);
+    });
+  }
+
+  // --- 2. Scroll & Intersection Observer Text Reveal Animations ---
+  function initRevealAnimations() {
+    const revealElements = document.querySelectorAll(
+      '.reveal-text, .reveal-up, .reveal-left, .reveal-right, .reveal-scale'
+    );
+
+    const revealObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('revealed');
+          }
+        });
+      },
+      {
+        threshold: 0.15,
+        rootMargin: '0px 0px -50px 0px'
+      }
+    );
+
+    revealElements.forEach(el => {
+      revealObserver.observe(el);
+    });
+  }
+
+  // Initial trigger
+  setTimeout(initRevealAnimations, 100);
+
+  // --- 3. Router & Page View Navigation System ---
+  const navLinks = document.querySelectorAll('.nav-item a, .footer-links a');
+  const pageViews = document.querySelectorAll('.page-view');
+
+  function handleRouting() {
+    let hash = window.location.hash || '#home';
+    
+    // Redirect legacy #doctors hash to #about
+    if (hash === '#doctors') {
+      hash = '#about';
+    }
+
+    const targetId = hash.replace('#', '');
+
+    let found = false;
+    pageViews.forEach(view => {
+      if (view.id === targetId) {
+        view.classList.add('active-view');
+        found = true;
+      } else {
+        view.classList.remove('active-view');
+      }
+    });
+
+    if (!found && pageViews.length > 0) {
+      pageViews[0].classList.add('active-view');
+    }
+
+    // Highlight active nav item
+    document.querySelectorAll('.nav-item a').forEach(link => {
+      if (link.getAttribute('href') === hash || (hash === '#about' && link.getAttribute('href') === '#about')) {
+        link.classList.add('active');
+      } else {
+        link.classList.remove('active');
+      }
+    });
+
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+
+    // Re-trigger reveal animations for active page
+    setTimeout(initRevealAnimations, 150);
+  }
+
+  window.addEventListener('hashchange', handleRouting);
+  handleRouting(); // Initial run
+
+  // --- 4. Interactive Before & After Smile Slider ---
+  const baSlider = document.getElementById('baSlider');
+  const baBeforeImage = document.getElementById('baBeforeImage');
+  const baHandle = document.getElementById('baHandle');
+
+  if (baSlider && baBeforeImage && baHandle) {
+    let isDragging = false;
+
+    function updateSliderPosition(x) {
+      const rect = baSlider.getBoundingClientRect();
+      let offsetX = x - rect.left;
+      if (offsetX < 0) offsetX = 0;
+      if (offsetX > rect.width) offsetX = rect.width;
+
+      const percentage = (offsetX / rect.width) * 100;
+      baBeforeImage.style.width = `${percentage}%`;
+      baHandle.style.left = `${percentage}%`;
+    }
+
+    baSlider.addEventListener('mousedown', (e) => {
+      isDragging = true;
+      updateSliderPosition(e.clientX);
+    });
+
+    window.addEventListener('mousemove', (e) => {
+      if (!isDragging) return;
+      updateSliderPosition(e.clientX);
+    });
+
+    window.addEventListener('mouseup', () => {
+      isDragging = false;
+    });
+
+    // Touch events for mobile responsiveness
+    baSlider.addEventListener('touchstart', (e) => {
+      isDragging = true;
+      updateSliderPosition(e.touches[0].clientX);
+    });
+
+    window.addEventListener('touchmove', (e) => {
+      if (!isDragging) return;
+      updateSliderPosition(e.touches[0].clientX);
+    });
+
+    window.addEventListener('touchend', () => {
+      isDragging = false;
+    });
+  }
+
+  // --- 5. Services Category Filter ---
+  const filterBtns = document.querySelectorAll('.filter-btn');
+  const serviceCards = document.querySelectorAll('.service-card');
+
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      filterBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      const filter = btn.getAttribute('data-filter');
+
+      serviceCards.forEach(card => {
+        if (filter === 'all' || card.getAttribute('data-category') === filter) {
+          card.style.display = 'flex';
+          card.style.animation = 'fadeIn 0.4s ease';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    });
+  });
+
+  // --- 6. Interactive Cost Estimator ---
+  const calcTreatment = document.getElementById('calcTreatment');
+  const calcUnits = document.getElementById('calcUnits');
+  const calcDiscount = document.getElementById('calcDiscount');
+  const calcTotalDisplay = document.getElementById('calcTotalDisplay');
+
+  function calculateEstimate() {
+    if (!calcTreatment || !calcUnits || !calcDiscount || !calcTotalDisplay) return;
+
+    const basePrice = parseFloat(calcTreatment.value) || 0;
+    const units = parseInt(calcUnits.value, 10) || 1;
+    const discount = parseFloat(calcDiscount.value) || 0;
+
+    const subtotal = basePrice * units;
+    const finalTotal = subtotal * (1 - discount / 100);
+
+    calcTotalDisplay.textContent = `₹${finalTotal.toLocaleString('en-IN')}`;
+  }
+
+  if (calcTreatment && calcUnits && calcDiscount) {
+    calcTreatment.addEventListener('change', calculateEstimate);
+    calcUnits.addEventListener('input', calculateEstimate);
+    calcDiscount.addEventListener('change', calculateEstimate);
+    calculateEstimate(); // Initial calculation
+  }
+
+  // --- 7. Quick Procedure Pre-fill to Booking ---
+  document.querySelectorAll('.book-proc-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const serviceName = btn.getAttribute('data-service');
+      const selectEl = document.getElementById('bookServiceSelect');
+      if (selectEl) {
+        for (let i = 0; i < selectEl.options.length; i++) {
+          if (selectEl.options[i].value.toLowerCase().includes(serviceName.toLowerCase())) {
+            selectEl.selectedIndex = i;
+            break;
+          }
+        }
+      }
+      window.location.hash = '#booking';
+    });
+  });
+
+  // --- 8. Multi-Step Booking Wizard ---
+  const stepNode1 = document.getElementById('stepNode1');
+  const stepNode2 = document.getElementById('stepNode2');
+  const stepNode3 = document.getElementById('stepNode3');
+
+  const stepContent1 = document.getElementById('stepContent1');
+  const stepContent2 = document.getElementById('stepContent2');
+  const stepContent3 = document.getElementById('stepContent3');
+
+  const gotoStep2 = document.getElementById('gotoStep2');
+  const gotoStep3 = document.getElementById('gotoStep3');
+  const backtoStep1 = document.getElementById('backtoStep1');
+  const backtoStep2 = document.getElementById('backtoStep2');
+
+  function showStep(stepNumber) {
+    stepContent1.classList.remove('active-step');
+    stepContent2.classList.remove('active-step');
+    stepContent3.classList.remove('active-step');
+
+    stepNode1.className = 'wizard-step-node';
+    stepNode2.className = 'wizard-step-node';
+    stepNode3.className = 'wizard-step-node';
+
+    if (stepNumber === 1) {
+      stepContent1.classList.add('active-step');
+      stepNode1.classList.add('active');
+    } else if (stepNumber === 2) {
+      stepContent2.classList.add('active-step');
+      stepNode1.classList.add('completed');
+      stepNode2.classList.add('active');
+    } else if (stepNumber === 3) {
+      stepContent3.classList.add('active-step');
+      stepNode1.classList.add('completed');
+      stepNode2.classList.add('completed');
+      stepNode3.classList.add('active');
+    }
+  }
+
+  if (gotoStep2) {
+    gotoStep2.addEventListener('click', () => {
+      const service = document.getElementById('bookServiceSelect').value;
+      if (!service) {
+        showToast('Please select a dental treatment first', 'warning');
+        return;
+      }
+      showStep(2);
+    });
+  }
+
+  if (gotoStep3) {
+    gotoStep3.addEventListener('click', () => {
+      const date = document.getElementById('bookDateInput').value;
+      if (!date) {
+        showToast('Please choose a consultation date', 'warning');
+        return;
+      }
+      showStep(3);
+    });
+  }
+
+  if (backtoStep1) backtoStep1.addEventListener('click', () => showStep(1));
+  if (backtoStep2) backtoStep2.addEventListener('click', () => showStep(2));
+
+  // Default Today's Date in Date Input
+  const dateInput = document.getElementById('bookDateInput');
+  if (dateInput) {
+    const today = new Date().toISOString().split('T')[0];
+    dateInput.value = today;
+    dateInput.min = today;
+  }
+
+  // Time Slot Selector
+  const slotBtns = document.querySelectorAll('.slot-btn');
+  slotBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      slotBtns.forEach(b => b.classList.remove('selected'));
+      btn.classList.add('selected');
+    });
+  });
+
+  // --- 9. Booking Form Submission & Modal Handling ---
+  const bookingWizardForm = document.getElementById('bookingWizardForm');
+  const bookingSuccessModal = document.getElementById('bookingSuccessModal');
+  const closeModalBtn = document.getElementById('closeModalBtn');
+  const modalPatientText = document.getElementById('modalPatientText');
+  const bookingCodeDisplay = document.getElementById('bookingCodeDisplay');
+
+  if (bookingWizardForm) {
+    bookingWizardForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      const name = document.getElementById('patientName').value;
+      const doctor = document.getElementById('bookDoctorSelect').value;
+      const service = document.getElementById('bookServiceSelect').value;
+      const date = document.getElementById('bookDateInput').value;
+
+      const randomCode = 'REF-SMILE-' + Math.floor(1000 + Math.random() * 9000);
+
+      if (modalPatientText) {
+        modalPatientText.innerHTML = `Thank you <strong>${name}</strong>! Your consultation for <em>${service}</em> with <strong>${doctor}</strong> is reserved for <u>${date}</u>.`;
+      }
+      if (bookingCodeDisplay) {
+        bookingCodeDisplay.textContent = randomCode;
+      }
+
+      bookingSuccessModal.classList.add('active');
+    });
+  }
+
+  if (closeModalBtn) {
+    closeModalBtn.addEventListener('click', () => {
+      bookingSuccessModal.classList.remove('active');
+      bookingWizardForm.reset();
+      showStep(1);
+      window.location.hash = '#home';
+      showToast('Appointment successfully scheduled!', 'success');
+    });
+  }
+
+  // --- 10. Notification Toast Helper ---
+  function showToast(message, type = 'info') {
+    let container = document.querySelector('.toast-container');
+    if (!container) {
+      container = document.createElement('div');
+      container.className = 'toast-container';
+      document.body.appendChild(container);
+    }
+
+    const toast = document.createElement('div');
+    toast.className = 'glass-toast';
+    const iconClass = type === 'warning' ? 'fa-triangle-exclamation' : 'fa-circle-check';
+    const iconColor = type === 'warning' ? 'var(--accent-gold)' : 'var(--accent-mint)';
+
+    toast.innerHTML = `<i class="fa-solid ${iconClass}" style="color:${iconColor}; font-size:1.2rem;"></i> <span>${message}</span>`;
+    container.appendChild(toast);
+
+    setTimeout(() => {
+      toast.style.opacity = '0';
+      toast.style.transform = 'translateX(50px)';
+      setTimeout(() => toast.remove(), 400);
+    }, 3500);
+  }
+
+});
