@@ -1,11 +1,48 @@
 /* ==========================================================================
    SmileOn Complete Dental Care - Interactive Application Engine
-   Updated with Light/Dark Mode Toggle & Scroll Reveal Animations
+   Updated with Mobile Hamburger Menu, Light/Dark Mode & Reveal Animations
    ========================================================================== */
 
 document.addEventListener('DOMContentLoaded', () => {
 
-  // --- 1. Light & Dark Theme Toggle System ---
+  // --- 1. Mobile Hamburger Drawer Toggle ---
+  const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+  const navLinksContainer = document.querySelector('.nav-links');
+
+  if (mobileMenuBtn && navLinksContainer) {
+    mobileMenuBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      navLinksContainer.classList.toggle('mobile-active');
+      const icon = mobileMenuBtn.querySelector('i');
+      if (icon) {
+        if (navLinksContainer.classList.contains('mobile-active')) {
+          icon.className = 'fa-solid fa-xmark';
+        } else {
+          icon.className = 'fa-solid fa-bars';
+        }
+      }
+    });
+
+    // Close menu when tapping any link
+    document.querySelectorAll('.nav-links a').forEach(link => {
+      link.addEventListener('click', () => {
+        navLinksContainer.classList.remove('mobile-active');
+        const icon = mobileMenuBtn.querySelector('i');
+        if (icon) icon.className = 'fa-solid fa-bars';
+      });
+    });
+
+    // Close menu when tapping outside
+    document.addEventListener('click', (e) => {
+      if (!navLinksContainer.contains(e.target) && !mobileMenuBtn.contains(e.target)) {
+        navLinksContainer.classList.remove('mobile-active');
+        const icon = mobileMenuBtn.querySelector('i');
+        if (icon) icon.className = 'fa-solid fa-bars';
+      }
+    });
+  }
+
+  // --- 2. Light & Dark Theme Toggle System ---
   const themeToggleBtn = document.getElementById('themeToggleBtn');
   const themeToggleIcon = document.getElementById('themeToggleIcon');
 
@@ -36,7 +73,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // --- 2. Scroll & Intersection Observer Text Reveal Animations ---
+  // --- 3. Scroll & Intersection Observer Text Reveal Animations ---
   function initRevealAnimations() {
     const revealElements = document.querySelectorAll(
       '.reveal-text, .reveal-up, .reveal-left, .reveal-right, .reveal-scale'
@@ -51,8 +88,8 @@ document.addEventListener('DOMContentLoaded', () => {
         });
       },
       {
-        threshold: 0.15,
-        rootMargin: '0px 0px -50px 0px'
+        threshold: 0.1,
+        rootMargin: '0px 0px -30px 0px'
       }
     );
 
@@ -64,8 +101,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // Initial trigger
   setTimeout(initRevealAnimations, 100);
 
-  // --- 3. Router & Page View Navigation System ---
-  const navLinks = document.querySelectorAll('.nav-item a, .footer-links a');
+  // --- 4. Router & Page View Navigation System ---
   const pageViews = document.querySelectorAll('.page-view');
 
   function handleRouting() {
@@ -110,7 +146,7 @@ document.addEventListener('DOMContentLoaded', () => {
   window.addEventListener('hashchange', handleRouting);
   handleRouting(); // Initial run
 
-  // --- 4. Interactive Before & After Smile Slider ---
+  // --- 5. Interactive Before & After Smile Slider ---
   const baSlider = document.getElementById('baSlider');
   const baBeforeImage = document.getElementById('baBeforeImage');
   const baHandle = document.getElementById('baHandle');
@@ -147,19 +183,19 @@ document.addEventListener('DOMContentLoaded', () => {
     baSlider.addEventListener('touchstart', (e) => {
       isDragging = true;
       updateSliderPosition(e.touches[0].clientX);
-    });
+    }, { passive: true });
 
     window.addEventListener('touchmove', (e) => {
       if (!isDragging) return;
       updateSliderPosition(e.touches[0].clientX);
-    });
+    }, { passive: true });
 
     window.addEventListener('touchend', () => {
       isDragging = false;
     });
   }
 
-  // --- 5. Services Category Filter ---
+  // --- 6. Services Category Filter ---
   const filterBtns = document.querySelectorAll('.filter-btn');
   const serviceCards = document.querySelectorAll('.service-card');
 
@@ -181,7 +217,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // --- 6. Interactive Cost Estimator ---
+  // --- 7. Interactive Cost Estimator ---
   const calcTreatment = document.getElementById('calcTreatment');
   const calcUnits = document.getElementById('calcUnits');
   const calcDiscount = document.getElementById('calcDiscount');
@@ -207,7 +243,7 @@ document.addEventListener('DOMContentLoaded', () => {
     calculateEstimate(); // Initial calculation
   }
 
-  // --- 7. Quick Procedure Pre-fill to Booking ---
+  // --- 8. Quick Procedure Pre-fill to Booking ---
   document.querySelectorAll('.book-proc-btn').forEach(btn => {
     btn.addEventListener('click', () => {
       const serviceName = btn.getAttribute('data-service');
@@ -224,7 +260,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // --- 8. Multi-Step Booking Wizard ---
+  // --- 9. Multi-Step Booking Wizard ---
   const stepNode1 = document.getElementById('stepNode1');
   const stepNode2 = document.getElementById('stepNode2');
   const stepNode3 = document.getElementById('stepNode3');
@@ -304,7 +340,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // --- 9. Booking Form Submission & Modal Handling ---
+  // --- 10. Booking Form Submission & Modal Handling ---
   const bookingWizardForm = document.getElementById('bookingWizardForm');
   const bookingSuccessModal = document.getElementById('bookingSuccessModal');
   const closeModalBtn = document.getElementById('closeModalBtn');
@@ -343,7 +379,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // --- 10. Notification Toast Helper ---
+  // --- 11. Notification Toast Helper ---
   function showToast(message, type = 'info') {
     let container = document.querySelector('.toast-container');
     if (!container) {
