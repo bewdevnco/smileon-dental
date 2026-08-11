@@ -1,6 +1,6 @@
 /* ==========================================================================
    SmileOn Complete Dental Care - Interactive Application Engine
-   Updated with Guaranteed Immediate Page Visibility & Mobile Drawer Controls
+   Updated with Structured WhatsApp Form Dispatch (08123253455)
    ========================================================================== */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -364,32 +364,62 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // --- 10. Booking Form Submission & Modal Handling ---
+  // --- 10. Booking Form Submission & WhatsApp Automated Message Dispatch ---
   const bookingWizardForm = document.getElementById('bookingWizardForm');
   const bookingSuccessModal = document.getElementById('bookingSuccessModal');
   const closeModalBtn = document.getElementById('closeModalBtn');
   const modalPatientText = document.getElementById('modalPatientText');
   const bookingCodeDisplay = document.getElementById('bookingCodeDisplay');
+  const modalWhatsAppBtn = document.getElementById('modalWhatsAppBtn');
 
   if (bookingWizardForm) {
     bookingWizardForm.addEventListener('submit', (e) => {
       e.preventDefault();
 
-      const name = document.getElementById('patientName').value;
+      const name = document.getElementById('patientName').value.trim();
+      const phone = document.getElementById('patientPhone').value.trim();
+      const email = document.getElementById('patientEmail').value.trim();
+      const notes = document.getElementById('patientNotes').value.trim();
       const doctor = document.getElementById('bookDoctorSelect').value;
       const service = document.getElementById('bookServiceSelect').value;
       const date = document.getElementById('bookDateInput').value;
 
+      const selectedSlotBtn = document.querySelector('.slot-btn.selected');
+      const timeSlot = selectedSlotBtn ? selectedSlotBtn.textContent.trim() : '10:00 AM';
+
       const randomCode = 'REF-SMILE-' + Math.floor(1000 + Math.random() * 9000);
 
+      // Build Premade Structured WhatsApp Message
+      let waMessage = `Hello SmileOn Dental Care, I would like to confirm my appointment:\n\n` +
+        `📌 *APPOINTMENT SUMMARY*\n` +
+        `• *Reference Code:* ${randomCode}\n` +
+        `• *Patient Name:* ${name}\n` +
+        `• *Phone Number:* ${phone}\n` +
+        (email ? `• *Email:* ${email}\n` : '') +
+        `• *Doctor Specialist:* ${doctor}\n` +
+        `• *Treatment Requested:* ${service}\n` +
+        `• *Date:* ${date}\n` +
+        `• *Time Slot:* ${timeSlot}\n` +
+        (notes ? `• *Special Notes/Symptoms:* ${notes}\n` : '') +
+        `\nPlease confirm my appointment slot. Thank you!`;
+
+      const encodedMsg = encodeURIComponent(waMessage);
+      const waUrl = `https://wa.me/918123253455?text=${encodedMsg}`;
+
       if (modalPatientText) {
-        modalPatientText.innerHTML = `Thank you <strong>${name}</strong>! Your consultation for <em>${service}</em> with <strong>${doctor}</strong> is reserved for <u>${date}</u>.`;
+        modalPatientText.innerHTML = `Thank you <strong>${name}</strong>! Your appointment summary for <em>${service}</em> with <strong>${doctor}</strong> is ready. Click below to send it via WhatsApp.`;
       }
       if (bookingCodeDisplay) {
         bookingCodeDisplay.textContent = randomCode;
       }
+      if (modalWhatsAppBtn) {
+        modalWhatsAppBtn.href = waUrl;
+      }
 
       bookingSuccessModal.classList.add('active');
+
+      // Auto-trigger WhatsApp link in a new tab/window
+      window.open(waUrl, '_blank');
     });
   }
 
@@ -399,7 +429,7 @@ document.addEventListener('DOMContentLoaded', () => {
       bookingWizardForm.reset();
       showStep(1);
       window.location.hash = '#home';
-      showToast('Appointment successfully scheduled!', 'success');
+      showToast('Appointment summary generated and dispatched to WhatsApp!', 'success');
     });
   }
 
