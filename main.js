@@ -1,6 +1,6 @@
 /* ==========================================================================
    SmileOn Complete Dental Care - Interactive Application Engine
-   Updated with Mobile Hamburger Menu, Light/Dark Mode & Reveal Animations
+   Updated with Dedicated Our Doctors Page & Mobile Optimization
    ========================================================================== */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -106,12 +106,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function handleRouting() {
     let hash = window.location.hash || '#home';
-    
-    // Redirect legacy #doctors hash to #about
-    if (hash === '#doctors') {
-      hash = '#about';
-    }
-
     const targetId = hash.replace('#', '');
 
     let found = false;
@@ -130,7 +124,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Highlight active nav item
     document.querySelectorAll('.nav-item a').forEach(link => {
-      if (link.getAttribute('href') === hash || (hash === '#about' && link.getAttribute('href') === '#about')) {
+      if (link.getAttribute('href') === hash) {
         link.classList.add('active');
       } else {
         link.classList.remove('active');
@@ -243,12 +237,28 @@ document.addEventListener('DOMContentLoaded', () => {
     calculateEstimate(); // Initial calculation
   }
 
-  // --- 8. Quick Procedure Pre-fill to Booking ---
+  // --- 8. Quick Doctor & Procedure Pre-fill to Booking ---
+  document.querySelectorAll('.book-doc-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const docName = btn.getAttribute('data-doctor');
+      const selectEl = document.getElementById('bookDoctorSelect');
+      if (selectEl && docName) {
+        for (let i = 0; i < selectEl.options.length; i++) {
+          if (selectEl.options[i].value.toLowerCase().includes(docName.toLowerCase())) {
+            selectEl.selectedIndex = i;
+            break;
+          }
+        }
+      }
+      window.location.hash = '#booking';
+    });
+  });
+
   document.querySelectorAll('.book-proc-btn').forEach(btn => {
     btn.addEventListener('click', () => {
       const serviceName = btn.getAttribute('data-service');
       const selectEl = document.getElementById('bookServiceSelect');
-      if (selectEl) {
+      if (selectEl && serviceName) {
         for (let i = 0; i < selectEl.options.length; i++) {
           if (selectEl.options[i].value.toLowerCase().includes(serviceName.toLowerCase())) {
             selectEl.selectedIndex = i;
