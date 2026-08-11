@@ -1,6 +1,6 @@
 /* ==========================================================================
    SmileOn Dental Clinic - Global Level Glassmorphism Design System
-   Updated with Pixel-Perfect Mobile Optimization & Responsive Fixes
+   Updated with Guaranteed Immediate Page Visibility & Mobile Optimization
    ========================================================================== */
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800;900&display=swap');
@@ -599,9 +599,9 @@ main.main-content {
 }
 
 .page-view.active-view {
-  display: block;
-  opacity: 1;
-  transform: translateY(0);
+  display: block !important;
+  opacity: 1 !important;
+  transform: translateY(0) !important;
 }
 
 .section-container {
@@ -637,7 +637,7 @@ main.main-content {
 }
 
 /* ==========================================================================
-   Scroll Reveal & Text Animations (Smooth Fade & Slide)
+   Scroll Reveal & Guaranteed Active View Visibility
    ========================================================================== */
 .reveal-text, .reveal-up, .reveal-left, .reveal-right, .reveal-scale {
   opacity: 0;
@@ -666,6 +666,16 @@ main.main-content {
 }
 
 .revealed {
+  opacity: 1 !important;
+  transform: translate(0, 0) scale(1) !important;
+}
+
+/* Guarantee visibility inside active views */
+.page-view.active-view .reveal-text,
+.page-view.active-view .reveal-up,
+.page-view.active-view .reveal-left,
+.page-view.active-view .reveal-right,
+.page-view.active-view .reveal-scale {
   opacity: 1 !important;
   transform: translate(0, 0) scale(1) !important;
 }

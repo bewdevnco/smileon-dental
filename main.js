@@ -1,6 +1,6 @@
 /* ==========================================================================
    SmileOn Complete Dental Care - Interactive Application Engine
-   Updated with Dedicated Our Doctors Page & Mobile Optimization
+   Updated with Guaranteed Immediate Page Visibility & Mobile Drawer Controls
    ========================================================================== */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -75,6 +75,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // --- 3. Scroll & Intersection Observer Text Reveal Animations ---
   function initRevealAnimations() {
+    // Immediately reveal all elements inside active page view so nothing is hidden
+    const activeView = document.querySelector('.page-view.active-view');
+    if (activeView) {
+      activeView.querySelectorAll('.reveal-text, .reveal-up, .reveal-left, .reveal-right, .reveal-scale').forEach(el => {
+        el.classList.add('revealed');
+      });
+    }
+
     const revealElements = document.querySelectorAll(
       '.reveal-text, .reveal-up, .reveal-left, .reveal-right, .reveal-scale'
     );
@@ -88,8 +96,8 @@ document.addEventListener('DOMContentLoaded', () => {
         });
       },
       {
-        threshold: 0.1,
-        rootMargin: '0px 0px -30px 0px'
+        threshold: 0.01,
+        rootMargin: '100px 0px 100px 0px'
       }
     );
 
@@ -99,7 +107,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // Initial trigger
-  setTimeout(initRevealAnimations, 100);
+  initRevealAnimations();
 
   // --- 4. Router & Page View Navigation System ---
   const pageViews = document.querySelectorAll('.page-view');
@@ -131,10 +139,15 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
 
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.scrollTo({ top: 0, behavior: 'instant' });
 
-    // Re-trigger reveal animations for active page
-    setTimeout(initRevealAnimations, 150);
+    // Guarantee immediate visibility of active page content
+    const currentActive = document.querySelector('.page-view.active-view');
+    if (currentActive) {
+      currentActive.querySelectorAll('.reveal-text, .reveal-up, .reveal-left, .reveal-right, .reveal-scale').forEach(el => {
+        el.classList.add('revealed');
+      });
+    }
   }
 
   window.addEventListener('hashchange', handleRouting);
@@ -204,6 +217,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (filter === 'all' || card.getAttribute('data-category') === filter) {
           card.style.display = 'flex';
           card.style.animation = 'fadeIn 0.4s ease';
+          card.classList.add('revealed');
         } else {
           card.style.display = 'none';
         }
