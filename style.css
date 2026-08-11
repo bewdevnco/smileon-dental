@@ -1,6 +1,6 @@
 /* ==========================================================================
    SmileOn Dental Clinic - Global Level Glassmorphism Design System
-   Updated with Guaranteed Immediate Page Visibility & Mobile Optimization
+   Updated with Guaranteed Doctor Header Alignment & Practo Profile Links
    ========================================================================== */
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800;900&display=swap');
@@ -1060,7 +1060,7 @@ main.main-content {
   color: rgba(255, 255, 255, 0.1);
 }
 
-/* Perfect Doctor Card Dimensions & Layout */
+/* Perfect Doctor Card Layout & Header Alignment */
 .doctor-card.featured-doctor {
   border-color: var(--accent-cyan);
   box-shadow: 0 0 35px rgba(0, 229, 207, 0.25);
@@ -1107,28 +1107,38 @@ main.main-content {
   font-size: 0.85rem;
   color: var(--accent-cyan);
   font-weight: 600;
+  z-index: 5;
+}
+
+.doctor-header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 0.5rem;
+}
+
+.doctor-header-row h3 {
+  font-size: 2.1rem;
+  margin: 0;
 }
 
 .doctor-trust-badge {
-  position: absolute;
-  top: 1.5rem;
-  right: 1.5rem;
+  position: static !important;
+  top: auto !important;
+  right: auto !important;
   background: rgba(2, 195, 154, 0.95);
   color: #041219;
   font-weight: 700;
   font-size: 0.85rem;
   padding: 0.4rem 1rem;
   border-radius: var(--radius-pill);
-  display: flex;
+  display: inline-flex;
   align-items: center;
   gap: 0.4rem;
   box-shadow: 0 4px 15px rgba(2, 195, 154, 0.4);
-  z-index: 10;
-}
-
-.doctor-details h3 {
-  font-size: 2.1rem;
-  margin-bottom: 0.35rem;
+  white-space: nowrap;
 }
 
 .doctor-degrees {
@@ -1184,6 +1194,30 @@ main.main-content {
   justify-content: space-between;
   align-items: center;
   margin-bottom: 1.75rem;
+}
+
+.doctor-actions-row {
+  display: flex;
+  gap: 0.65rem;
+  flex-wrap: wrap;
+}
+
+.doctor-actions-row .btn {
+  flex: 1;
+  min-width: 135px;
+}
+
+.practo-btn {
+  background: rgba(43, 114, 226, 0.15) !important;
+  border-color: rgba(43, 114, 226, 0.4) !important;
+  color: #38bdf8 !important;
+}
+
+.practo-btn:hover {
+  background: rgba(43, 114, 226, 0.3) !important;
+  border-color: #38bdf8 !important;
+  color: #ffffff !important;
+  transform: translateY(-2px);
 }
 
 /* ==========================================================================
@@ -1829,12 +1863,10 @@ footer.glass-footer {
     padding: 1.25rem;
   }
 
-  .doctor-trust-badge {
-    position: relative;
-    top: auto;
-    right: auto;
-    display: inline-flex;
-    margin-bottom: 1rem;
+  .doctor-header-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
   }
 
   .doctor-portrait-wrapper {
