@@ -1,6 +1,6 @@
 /* ==========================================================================
    SmileOn Dental Clinic - Global Level Glassmorphism Design System
-   Updated with Perfectly Proportioned Navbar & Theme Toggle Inside Pill Bounds
+   Updated with Fixed Mobile Dropdown Navigation & Pixel-Perfect Responsive Rules
    ========================================================================== */
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800;900&display=swap');
@@ -328,7 +328,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* ==========================================================================
-   Perfectly Proportioned Luxury Glass Navbar Layout
+   Perfectly Proportioned Luxury Glass Navbar Layout (overflow: visible for Mobile Drawer)
    ========================================================================== */
 .navbar-container {
   position: fixed;
@@ -354,7 +354,7 @@ h1, h2, h3, h4, h5, h6 {
   gap: 0.75rem;
   box-shadow: 0 12px 45px rgba(0, 0, 0, 0.5);
   transition: all 0.4s ease;
-  overflow: hidden;
+  overflow: visible !important; /* CRITICAL FIX: Overflow visible ensures mobile menu drawer is never clipped */
 }
 
 [data-theme="light"] .navbar {
@@ -1692,7 +1692,7 @@ footer.glass-footer {
 }
 
 /* ==========================================================================
-   Comprehensive Pixel-Perfect Mobile Responsive System (320px - 1300px)
+   Comprehensive Pixel-Perfect Mobile Responsive System (320px - 1100px)
    ========================================================================== */
 
 @media (max-width: 1280px) {
@@ -1714,22 +1714,24 @@ footer.glass-footer {
   .mobile-menu-btn {
     display: flex !important;
   }
+  
+  /* Mobile Dropdown Drawer Fixes */
   .nav-links {
     display: none;
     position: absolute;
-    top: calc(100% + 0.5rem);
+    top: calc(100% + 0.6rem);
     left: 0;
     right: 0;
     width: 100%;
-    background: rgba(6, 22, 31, 0.96);
+    background: rgba(6, 22, 31, 0.97);
     backdrop-filter: blur(25px);
     -webkit-backdrop-filter: blur(25px);
     border: 1px solid var(--border-glass-bright);
     border-radius: var(--radius-md);
     padding: 0.85rem;
     flex-direction: column;
-    gap: 0.4rem;
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.65);
+    gap: 0.45rem;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.75);
     z-index: 1001;
   }
   [data-theme="light"] .nav-links {
@@ -1755,7 +1757,7 @@ footer.glass-footer {
 
 @media (max-width: 850px) {
   .navbar-container {
-    width: 96%;
+    width: 95%;
     top: 0.5rem;
   }
 
@@ -1855,6 +1857,16 @@ footer.glass-footer {
     flex-direction: column;
     align-items: flex-start;
     gap: 0.5rem;
+  }
+
+  .doctor-actions-row {
+    flex-direction: column;
+    width: 100%;
+    gap: 0.6rem;
+  }
+
+  .doctor-actions-row .btn {
+    width: 100%;
   }
 
   .doctor-portrait-wrapper {
