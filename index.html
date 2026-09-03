@@ -628,7 +628,7 @@
         <div class="section-header reveal-up">
           <div class="section-tag">Clinical Treatments</div>
           <h2 class="reveal-text">Specialized <span class="gradient-text">Services</span></h2>
-          <p>Filter by category to explore procedures, duration, and instant cost estimators.</p>
+          <p>Filter by category to explore procedures, clinical scope, and personalized consultation options.</p>
         </div>
 
         <!-- Filter Bar -->
@@ -659,8 +659,7 @@
               </ul>
             </div>
             <div class="service-meta">
-              <span class="service-price">From ₹1,500</span>
-              <button class="btn btn-secondary book-proc-btn" data-service="Scaling & Polishing">Book Visit</button>
+              <button class="btn btn-primary book-proc-btn" data-service="Scaling & Polishing" style="width:100%;">Book Consultation</button>
             </div>
           </div>
 
@@ -680,8 +679,7 @@
               </ul>
             </div>
             <div class="service-meta">
-              <span class="service-price">From ₹45,000</span>
-              <button class="btn btn-secondary book-proc-btn" data-service="Invisible Clear Braces">Book Visit</button>
+              <button class="btn btn-primary book-proc-btn" data-service="Invisible Clear Braces" style="width:100%;">Book Consultation</button>
             </div>
           </div>
 
@@ -701,8 +699,7 @@
               </ul>
             </div>
             <div class="service-meta">
-              <span class="service-price">From ₹25,000</span>
-              <button class="btn btn-secondary book-proc-btn" data-service="Dental Implants">Book Visit</button>
+              <button class="btn btn-primary book-proc-btn" data-service="Dental Implants" style="width:100%;">Book Consultation</button>
             </div>
           </div>
 
@@ -722,8 +719,7 @@
               </ul>
             </div>
             <div class="service-meta">
-              <span class="service-price">From ₹6,500</span>
-              <button class="btn btn-secondary book-proc-btn" data-service="Root Canal & Endo-Surgery">Book Visit</button>
+              <button class="btn btn-primary book-proc-btn" data-service="Root Canal & Endo-Surgery" style="width:100%;">Book Consultation</button>
             </div>
           </div>
 
@@ -743,8 +739,7 @@
               </ul>
             </div>
             <div class="service-meta">
-              <span class="service-price">From ₹12,000 / tooth</span>
-              <button class="btn btn-secondary book-proc-btn" data-service="Porcelain Laminates">Book Visit</button>
+              <button class="btn btn-primary book-proc-btn" data-service="Porcelain Laminates" style="width:100%;">Book Consultation</button>
             </div>
           </div>
 
@@ -764,60 +759,10 @@
               </ul>
             </div>
             <div class="service-meta">
-              <span class="service-price">From ₹8,000</span>
-              <button class="btn btn-secondary book-proc-btn" data-service="Teeth Whitening">Book Visit</button>
+              <button class="btn btn-primary book-proc-btn" data-service="Teeth Whitening" style="width:100%;">Book Consultation</button>
             </div>
           </div>
 
-        </div>
-
-        <!-- Interactive Cost Estimator Widget -->
-        <div class="glass-panel calculator-box reveal-scale">
-          <div style="text-align:center; margin-bottom:1.75rem;">
-            <div class="section-tag">Instant Quote Calculator</div>
-            <h3 style="font-size:1.8rem;" class="reveal-text">Procedure <span class="gradient-text">Cost Estimator</span></h3>
-          </div>
-
-          <div class="calc-grid">
-            <div>
-              <div class="calc-form-group">
-                <label>Select Treatment</label>
-                <select id="calcTreatment" class="calc-select">
-                  <option value="1500">Scaling & Polishing - ₹1,500</option>
-                  <option value="45000">Invisible Clear Braces - ₹45,000</option>
-                  <option value="25000">Single Dental Implant - ₹25,000</option>
-                  <option value="6500">Root Canal Treatment - ₹6,500</option>
-                  <option value="12000">Porcelain Laminate / Veneer - ₹12,000</option>
-                  <option value="7500">Endo-Surgery / Apicoectomy - ₹7,500</option>
-                  <option value="8000">Laser Teeth Whitening - ₹8,000</option>
-                </select>
-              </div>
-
-              <div class="calc-form-group">
-                <label>Units / Teeth Quantity</label>
-                <input type="number" id="calcUnits" class="calc-input" value="1" min="1" max="32">
-              </div>
-
-              <div class="calc-form-group">
-                <label>Welcome Package Discount</label>
-                <select id="calcDiscount" class="calc-select">
-                  <option value="10">10% Online Booking Discount</option>
-                  <option value="0">Standard Pricing</option>
-                </select>
-              </div>
-            </div>
-
-            <div class="calc-result-panel">
-              <span style="font-size:0.9rem; color:var(--text-muted);">Estimated Total Investment</span>
-              <div class="calc-total" id="calcTotalDisplay">₹1,350</div>
-              <p style="font-size:0.8rem; color:var(--text-muted); margin-bottom:1.25rem;">
-                * Includes consultation fee, digital scanning, and post-op care kit.
-              </p>
-              <a href="#booking" class="btn btn-primary" style="align-self:center;">
-                <i class="fa-solid fa-lock"></i> Lock In Estimate & Book
-              </a>
-            </div>
-          </div>
         </div>
 
       </div>
@@ -1058,7 +1003,7 @@
       </div>
       <h2>Appointment Prepared!</h2>
       <p style="color:var(--text-muted); margin-top:0.5rem;" id="modalPatientText">
-        Thank you! Your full appointment summary is ready to send via WhatsApp.
+        Thank you! Your appointment summary is ready to send via WhatsApp.
       </p>
 
       <div class="booking-code-box" id="bookingCodeDisplay">
@@ -1102,7 +1047,7 @@
           <li><a href="#home">Home</a></li>
           <li><a href="#about">About Us</a></li>
           <li><a href="#doctors">Our Doctors</a></li>
-          <li><a href="#services">Services & Pricing</a></li>
+          <li><a href="#services">Services</a></li>
           <li><a href="#booking">Contacts & Booking</a></li>
         </ul>
       </div>
