@@ -2,4 +2,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://smileon-dental.vercel.app/sitemap.xml
+Sitemap: https://smileon.co.in/sitemap.xml
