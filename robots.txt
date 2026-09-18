@@ -1,0 +1,5 @@
+# robots.txt for Smile On Dental Clinic Marathahalli
+User-agent: *
+Allow: /
+
+Sitemap: https://smileon.co.in/sitemap.xml

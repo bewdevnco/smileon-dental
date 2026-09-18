@@ -61,13 +61,13 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  // Load saved theme or default to dark
-  const savedTheme = localStorage.getItem('smileon-theme') || 'dark';
+  // Load saved theme or default to light
+  const savedTheme = localStorage.getItem('smileon-theme') || 'light';
   applyTheme(savedTheme);
 
   if (themeToggleBtn) {
     themeToggleBtn.addEventListener('click', () => {
-      const currentTheme = document.documentElement.getAttribute('data-theme') || 'dark';
+      const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
       const nextTheme = currentTheme === 'dark' ? 'light' : 'dark';
       applyTheme(nextTheme);
     });
