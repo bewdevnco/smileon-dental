@@ -102,61 +102,69 @@ body {
   position: relative;
   min-height: 100vh;
   width: 100%;
-  background: radial-gradient(circle at 15% 15%, #082936 0%, #05131a 55%),
-              radial-gradient(circle at 85% 75%, #053331 0%, #05131a 60%);
+  background-color: #05131a;
+  background-image: 
+    radial-gradient(circle at 15% 15%, rgba(8, 41, 54, 0.8) 0%, rgba(5, 19, 26, 0.95) 55%),
+    radial-gradient(circle at 85% 75%, rgba(5, 51, 49, 0.7) 0%, rgba(5, 19, 26, 0.95) 60%),
+    radial-gradient(rgba(0, 229, 207, 0.07) 1px, transparent 1px);
+  background-size: 100% 100%, 100% 100%, 32px 32px;
   background-attachment: fixed;
   transition: background 0.4s ease;
   overflow-x: hidden;
 }
 
 [data-theme="light"] body {
-  background: radial-gradient(circle at 15% 15%, #ccfbf1 0%, #f0fdfa 55%),
-              radial-gradient(circle at 85% 75%, #e6fffa 0%, #f0fdfa 60%);
+  background-color: #f0fdfa;
+  background-image: 
+    radial-gradient(circle at 15% 15%, rgba(204, 251, 241, 0.9) 0%, rgba(240, 253, 250, 0.95) 55%),
+    radial-gradient(circle at 85% 75%, rgba(230, 255, 250, 0.85) 0%, rgba(240, 253, 250, 0.95) 60%),
+    radial-gradient(rgba(0, 122, 120, 0.08) 1px, transparent 1px);
+  background-size: 100% 100%, 100% 100%, 32px 32px;
   background-attachment: fixed;
 }
 
-/* Ambient Floating Glowing Orbs */
+/* Minimal Ambient Glowing Orbs */
 .bg-orb {
   position: fixed;
   border-radius: 50%;
-  filter: blur(110px);
+  filter: blur(130px);
   z-index: 0;
   pointer-events: none;
-  opacity: 0.4;
-  animation: floatOrb 20s ease-in-out infinite alternate;
+  opacity: 0.28;
+  animation: floatOrb 22s ease-in-out infinite alternate;
 }
 
 .bg-orb-1 {
-  top: -10%;
-  left: -5%;
-  width: 550px;
-  height: 550px;
+  top: -12%;
+  left: -8%;
+  width: 580px;
+  height: 580px;
   background: radial-gradient(circle, var(--accent-cyan), transparent 70%);
 }
 
 .bg-orb-2 {
-  bottom: 5%;
-  right: -5%;
-  width: 650px;
-  height: 650px;
+  bottom: 0%;
+  right: -8%;
+  width: 600px;
+  height: 600px;
   background: radial-gradient(circle, var(--accent-teal), transparent 70%);
   animation-delay: -7s;
 }
 
 .bg-orb-3 {
-  top: 45%;
-  left: 35%;
-  width: 450px;
-  height: 450px;
+  top: 40%;
+  left: 30%;
+  width: 400px;
+  height: 400px;
   background: radial-gradient(circle, var(--accent-mint), transparent 70%);
   animation-delay: -14s;
-  opacity: 0.25;
+  opacity: 0.18;
 }
 
 @keyframes floatOrb {
   0% { transform: translate(0, 0) scale(1); }
-  50% { transform: translate(50px, 35px) scale(1.1); }
-  100% { transform: translate(-35px, 60px) scale(0.95); }
+  50% { transform: translate(40px, 30px) scale(1.08); }
+  100% { transform: translate(-30px, 50px) scale(0.95); }
 }
 
 /* Typography Utilities */
@@ -642,42 +650,93 @@ main.main-content {
 }
 
 /* ==========================================================================
-   Scroll Reveal & Guaranteed Active View Visibility
+   Scroll Reveal & Dynamic Animation Engine
    ========================================================================== */
-.reveal-text, .reveal-up, .reveal-left, .reveal-right, .reveal-scale {
+.reveal-text, .reveal-up, .reveal-left, .reveal-right, .reveal-scale, .reveal-tilt, .reveal-flip {
   opacity: 0;
-  transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1), transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1), transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
   will-change: opacity, transform;
 }
 
 .reveal-up {
-  transform: translateY(30px);
+  transform: translateY(50px);
 }
 
 .reveal-left {
-  transform: translateX(-30px);
+  transform: translateX(-55px);
 }
 
 .reveal-right {
-  transform: translateX(-30px);
+  transform: translateX(55px);
 }
 
 .reveal-scale {
-  transform: scale(0.95);
+  transform: scale(0.88);
+}
+
+.reveal-tilt {
+  transform: translateY(40px) rotateX(16deg);
+  transform-origin: top center;
+}
+
+.reveal-flip {
+  transform: perspective(600px) rotateY(-18deg) translateY(30px);
 }
 
 .reveal-text {
-  transform: translateY(15px);
+  transform: translateY(30px);
 }
+
+/* Stagger Delay Utility Classes for Grid Items & Lists */
+.stagger-1 { transition-delay: 0.08s !important; }
+.stagger-2 { transition-delay: 0.16s !important; }
+.stagger-3 { transition-delay: 0.24s !important; }
+.stagger-4 { transition-delay: 0.32s !important; }
+.stagger-5 { transition-delay: 0.40s !important; }
+.stagger-6 { transition-delay: 0.48s !important; }
 
 .revealed {
   opacity: 1 !important;
-  transform: translate(0, 0) scale(1) !important;
+  transform: translate(0, 0) scale(1) rotate(0deg) !important;
 }
 
-/* Guarantee visibility inside active views */
-.page-view.active-view .reveal-text,
-.page-view.active-view .reveal-up,
+/* Mobile-Specific Animation Optimization (Prevents horizontal scrollbar overflow & touch lag) */
+@media (max-width: 850px) {
+  .reveal-left {
+    transform: translateY(35px) !important; /* Convert horizontal slide to vertical on mobile to avoid overflow */
+  }
+
+  .reveal-right {
+    transform: translateY(35px) !important;
+  }
+
+  .reveal-tilt, .reveal-flip {
+    transform: translateY(30px) !important;
+  }
+
+  .reveal-up {
+    transform: translateY(30px) !important;
+  }
+
+  .reveal-scale {
+    transform: scale(0.94) !important;
+  }
+
+  .reveal-text, .reveal-up, .reveal-left, .reveal-right, .reveal-scale, .reveal-tilt, .reveal-flip {
+    transition-duration: 0.6s !important;
+  }
+}
+
+/* Smooth active view reveal trigger */
+.page-view.active-view .reveal-text.revealed,
+.page-view.active-view .reveal-up.revealed,
+.page-view.active-view .reveal-left.revealed,
+.page-view.active-view .reveal-right.revealed,
+.page-view.active-view .reveal-scale.revealed,
+.page-view.active-view .reveal-tilt.revealed,
+.page-view.active-view .reveal-flip.revealed {
+  opacity: 1;
+}
 .page-view.active-view .reveal-left,
 .page-view.active-view .reveal-right,
 .page-view.active-view .reveal-scale {

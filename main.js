@@ -75,16 +75,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // --- 3. Scroll & Intersection Observer Text Reveal Animations ---
   function initRevealAnimations() {
-    // Immediately reveal all elements inside active page view so nothing is hidden
-    const activeView = document.querySelector('.page-view.active-view');
-    if (activeView) {
-      activeView.querySelectorAll('.reveal-text, .reveal-up, .reveal-left, .reveal-right, .reveal-scale').forEach(el => {
-        el.classList.add('revealed');
-      });
-    }
-
     const revealElements = document.querySelectorAll(
-      '.reveal-text, .reveal-up, .reveal-left, .reveal-right, .reveal-scale'
+      '.reveal-text, .reveal-up, .reveal-left, .reveal-right, .reveal-scale, .reveal-tilt, .reveal-flip'
     );
 
     const revealObserver = new IntersectionObserver(
@@ -96,8 +88,8 @@ document.addEventListener('DOMContentLoaded', () => {
         });
       },
       {
-        threshold: 0.01,
-        rootMargin: '100px 0px 100px 0px'
+        threshold: 0.15,
+        rootMargin: '0px 0px -50px 0px'
       }
     );
 
@@ -106,8 +98,24 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  // Trigger reveal animations on active page elements
+  function triggerActiveViewReveals() {
+    const activeView = document.querySelector('.page-view.active-view');
+    if (activeView) {
+      const elements = activeView.querySelectorAll(
+        '.reveal-text, .reveal-up, .reveal-left, .reveal-right, .reveal-scale, .reveal-tilt, .reveal-flip'
+      );
+      elements.forEach((el, index) => {
+        setTimeout(() => {
+          el.classList.add('revealed');
+        }, index * 80);
+      });
+    }
+  }
+
   // Initial trigger
   initRevealAnimations();
+  triggerActiveViewReveals();
 
   // --- 4. Router & Page View Navigation System ---
   const pageViews = document.querySelectorAll('.page-view');
@@ -141,13 +149,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     window.scrollTo({ top: 0, behavior: 'instant' });
 
-    // Guarantee immediate visibility of active page content
-    const currentActive = document.querySelector('.page-view.active-view');
-    if (currentActive) {
-      currentActive.querySelectorAll('.reveal-text, .reveal-up, .reveal-left, .reveal-right, .reveal-scale').forEach(el => {
-        el.classList.add('revealed');
-      });
-    }
+    // Trigger dynamic reveal sequence for newly active page view
+    triggerActiveViewReveals();
   }
 
   window.addEventListener('hashchange', handleRouting);

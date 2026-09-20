@@ -1,7 +1,7 @@
 {
   "name": "smileon-dental-clinic",
   "version": "1.0.0",
-  "description": "State-of-the-art Glassmorphism Website for SmileOn Dental Clinic",
+  "description": "State-of-the-art  Website for SmileOn Dental Clinic",
   "type": "module",
   "scripts": {
     "dev": "vite",
