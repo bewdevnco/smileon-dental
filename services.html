@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Dental Services & Treatments | Smile On Dental Clinic Marathahalli</title>
+  <meta name="description"
+    content="Explore comprehensive dental treatments at Smile On Dental Care in Marathahalli: painless root canals, scaling & polishing, invisible clear braces, dental implants, porcelain veneers, and laser teeth whitening.">
+  <meta name="keywords"
+    content="teeth cleaning Marathahalli, root canal treatment Bangalore, dental implants Spice Garden, clear braces Marathahalli, teeth whitening, porcelain veneers">
+
+  <!-- Open Graph / Facebook / WhatsApp Meta Tags -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://smileon.co.in/services.html">
+  <meta property="og:title" content="Dental Services & Treatments | Smile On Dental Clinic">
+  <meta property="og:description"
+    content="From routine scaling & polishing to 3D dental implants and painless laser root canals. Explore our specialized services.">
+  <meta property="og:image" content="https://smileon.co.in/assets/hero_clinic.jpg">
+
+  <!-- Twitter Meta Tags -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Dental Services & Treatments | Smile On Dental Clinic">
+  <meta name="twitter:description"
+    content="From routine scaling & polishing to 3D dental implants and painless laser root canals. Explore our specialized services.">
+  <meta name="twitter:image" content="https://smileon.co.in/assets/hero_clinic.jpg">
+
+  <link rel="canonical" href="https://smileon.co.in/services.html">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="assets/fav.png">
+
+  <!-- FontAwesome Icons & Custom Stylesheet -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="/style.css">
+</head>
+
+<body>
+
+  <!-- Floating Ambient Glowing Light Orbs -->
+  <div class="bg-orb bg-orb-1"></div>
+  <div class="bg-orb bg-orb-2"></div>
+  <div class="bg-orb bg-orb-3"></div>
+
+  <!-- Perfectly Spaced Luxury Glass Navigation Bar -->
+  <div class="navbar-container">
+    <nav class="navbar">
+      <a href="/index.html" class="brand-logo">
+        <div class="logo-img-wrapper">
+          <img src="/assets/clinic_logo.png" alt="SmileOn Dental Clinic Logo">
+        </div>
+        <div class="brand-text">
+          <div class="brand-main-title">Smile<span class="gradient-text-glow">On</span></div>
+          <div class="brand-tagline">Dental Care <span class="brand-tagline-extra">&bull; Keep Your Smile On</span>
+          </div>
+        </div>
+      </a>
+
+      <ul class="nav-links">
+        <li class="nav-item"><a href="/index.html"><i class="fa-solid fa-house"></i> Home</a></li>
+        <li class="nav-item"><a href="/about.html"><i class="fa-solid fa-circle-info"></i> About Us</a></li>
+        <li class="nav-item"><a href="/doctors.html"><i class="fa-solid fa-user-doctor"></i> Our Doctors</a></li>
+        <li class="nav-item"><a href="/services.html" class="active"><i class="fa-solid fa-briefcase-medical"></i> Services</a></li>
+        <li class="nav-item mobile-only-nav"><a href="/booking.html" class="nav-booking-highlight"><i
+              class="fa-solid fa-calendar-check"></i> Contacts & Booking</a></li>
+      </ul>
+
+      <div class="nav-cta">
+        <a href="/booking.html" class="btn btn-primary nav-booking-highlight desktop-only-nav">
+          <i class="fa-solid fa-calendar-check"></i> Contacts & Booking
+        </a>
+        <div class="status-badge desktop-only-nav">
+          <div class="status-dot"></div>
+          <span>Open Today • 9:30 AM - 8:30 PM</span>
+        </div>
+
+        <!-- Light / Dark Mode Toggle Button -->
+        <button class="theme-toggle-btn" id="themeToggleBtn" aria-label="Toggle theme mode"
+          title="Switch Light/Dark Mode">
+          <i class="fa-solid fa-sun" id="themeToggleIcon"></i>
+        </button>
+
+        <!-- Mobile Menu Hamburger Button -->
+        <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle menu">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+      </div>
+    </nav>
+  </div>
+
+  <!-- Main Content Wrapper -->
+  <main class="main-content">
+
+    <section id="services" class="page-view active-view">
+      <div class="section-container">
+
+        <div class="section-header reveal-up">
+          <div class="section-tag">Clinical Treatments</div>
+          <h1 class="reveal-text">Specialized <span class="gradient-text">Services</span></h1>
+          <p>Filter by category to explore procedures, clinical scope, and personalized consultation options.</p>
+        </div>
+
+        <!-- Filter Bar -->
+        <div class="service-filter-bar reveal-up">
+          <button class="filter-btn active" data-filter="all">All Treatments</button>
+          <button class="filter-btn" data-filter="cosmetic">Scaling & Cosmetic Dentistry</button>
+          <button class="filter-btn" data-filter="ortho">Invisible Clear Braces</button>
+          <button class="filter-btn" data-filter="implants">Implants & Artificial Teeth</button>
+          <button class="filter-btn" data-filter="surgery">Endo-Surgery & Root Canals</button>
+        </div>
+
+        <!-- Services Grid -->
+        <div class="services-grid" id="servicesGrid">
+
+          <!-- Service Card 1 -->
+          <div class="glass-card service-card reveal-up" data-category="cosmetic">
+            <div>
+              <div style="font-size: 2rem; color:var(--accent-cyan); margin-bottom:1rem;">
+                <i class="fa-solid fa-sparkles"></i>
+              </div>
+              <h3>Scaling & Polishing</h3>
+              <p style="color:var(--text-muted); font-size:0.95rem; margin-top:0.5rem;">
+                Ultrasonic tartar removal, stain elimination, and enamel polishing for fresh breath and healthy gums.
+              </p>
+              <ul style="margin-top:1rem; color:var(--text-muted); font-size:0.85rem; list-style:none;">
+                <li><i class="fa-solid fa-check" style="color:var(--accent-mint);"></i> Painless Ultrasonic Scaler</li>
+                <li><i class="fa-solid fa-check" style="color:var(--accent-mint);"></i> Gum Disease Prevention</li>
+              </ul>
+            </div>
+            <div class="service-meta">
+              <a href="/booking.html?service=Scaling%20%26%20Polishing" class="btn btn-primary book-proc-btn" data-service="Scaling & Polishing" style="width:100%; text-decoration:none;">
+                Book Consultation
+              </a>
+            </div>
+          </div>
+
+          <!-- Service Card 2 -->
+          <div class="glass-card service-card reveal-up" data-category="ortho">
+            <div>
+              <div style="font-size: 2rem; color:var(--accent-cyan); margin-bottom:1rem;">
+                <i class="fa-solid fa-teeth-open"></i>
+              </div>
+              <h3>Invisible / Clear Braces</h3>
+              <p style="color:var(--text-muted); font-size:0.95rem; margin-top:0.5rem;">
+                Custom clear aligners aligning teeth discreetly without metal wires or food restrictions.
+              </p>
+              <ul style="margin-top:1rem; color:var(--text-muted); font-size:0.85rem; list-style:none;">
+                <li><i class="fa-solid fa-check" style="color:var(--accent-mint);"></i> 3D Digital Jaw Simulation</li>
+                <li><i class="fa-solid fa-check" style="color:var(--accent-mint);"></i> Virtually Invisible Design</li>
+              </ul>
+            </div>
+            <div class="service-meta">
+              <a href="/booking.html?service=Invisible%20Clear%20Braces" class="btn btn-primary book-proc-btn" data-service="Invisible Clear Braces" style="width:100%; text-decoration:none;">
+                Book Consultation
+              </a>
+            </div>
+          </div>
+
+          <!-- Service Card 3 -->
+          <div class="glass-card service-card reveal-up" data-category="implants">
+            <div>
+              <div style="font-size: 2rem; color:var(--accent-cyan); margin-bottom:1rem;">
+                <i class="fa-solid fa-tooth"></i>
+              </div>
+              <h3>Dental Implants & Artificial Teeth</h3>
+              <p style="color:var(--text-muted); font-size:0.95rem; margin-top:0.5rem;">
+                Permanent titanium root implants and ceramic crowns restoring natural bite strength and aesthetics.
+              </p>
+              <ul style="margin-top:1rem; color:var(--text-muted); font-size:0.85rem; list-style:none;">
+                <li><i class="fa-solid fa-check" style="color:var(--accent-mint);"></i> Biocompatible Titanium</li>
+                <li><i class="fa-solid fa-check" style="color:var(--accent-mint);"></i> Lifetime Durability</li>
+              </ul>
+            </div>
+            <div class="service-meta">
+              <a href="/booking.html?service=Dental%20Implants" class="btn btn-primary book-proc-btn" data-service="Dental Implants" style="width:100%; text-decoration:none;">
+                Book Consultation
+              </a>
+            </div>
+          </div>
+
+          <!-- Service Card 4 -->
+          <div class="glass-card service-card reveal-up" data-category="surgery">
+            <div>
+              <div style="font-size: 2rem; color:var(--accent-cyan); margin-bottom:1rem;">
+                <i class="fa-solid fa-microscope"></i>
+              </div>
+              <h3>Endo-Surgery & Root Canals</h3>
+              <p style="color:var(--text-muted); font-size:0.95rem; margin-top:0.5rem;">
+                Painless root canal treatment and micro-endodontic resection saving damaged natural teeth efficiently.
+              </p>
+              <ul style="margin-top:1rem; color:var(--text-muted); font-size:0.85rem; list-style:none;">
+                <li><i class="fa-solid fa-check" style="color:var(--accent-mint);"></i> Micro-Surgical Precision</li>
+                <li><i class="fa-solid fa-check" style="color:var(--accent-mint);"></i> Painless Single-Visit Protocol</li>
+              </ul>
+            </div>
+            <div class="service-meta">
+              <a href="/booking.html?service=Root%20Canal%20Treatment" class="btn btn-primary book-proc-btn" data-service="Root Canal Treatment" style="width:100%; text-decoration:none;">
+                Book Consultation
+              </a>
+            </div>
+          </div>
+
+          <!-- Service Card 5 -->
+          <div class="glass-card service-card reveal-up" data-category="cosmetic">
+            <div>
+              <div style="font-size: 2rem; color:var(--accent-cyan); margin-bottom:1rem;">
+                <i class="fa-solid fa-gem"></i>
+              </div>
+              <h3>Porcelain Laminates & Veneers</h3>
+              <p style="color:var(--text-muted); font-size:0.95rem; margin-top:0.5rem;">
+                Ultra-thin ceramic facings correcting gaps, discolored enamel, and minor chips permanently.
+              </p>
+              <ul style="margin-top:1rem; color:var(--text-muted); font-size:0.85rem; list-style:none;">
+                <li><i class="fa-solid fa-check" style="color:var(--accent-mint);"></i> Stain-Resistant Porcelain</li>
+                <li><i class="fa-solid fa-check" style="color:var(--accent-mint);"></i> Natural Translucency</li>
+              </ul>
+            </div>
+            <div class="service-meta">
+              <a href="/booking.html?service=Porcelain%20Laminates" class="btn btn-primary book-proc-btn" data-service="Porcelain Laminates" style="width:100%; text-decoration:none;">
+                Book Consultation
+              </a>
+            </div>
+          </div>
+
+          <!-- Service Card 6 -->
+          <div class="glass-card service-card reveal-up" data-category="cosmetic">
+            <div>
+              <div style="font-size: 2rem; color:var(--accent-cyan); margin-bottom:1rem;">
+                <i class="fa-solid fa-wand-magic"></i>
+              </div>
+              <h3>Laser Teeth Whitening</h3>
+              <p style="color:var(--text-muted); font-size:0.95rem; margin-top:0.5rem;">
+                In-office Zoom light whitening brightening discolored teeth up to 8 shades in a 45-min session.
+              </p>
+              <ul style="margin-top:1rem; color:var(--text-muted); font-size:0.85rem; list-style:none;">
+                <li><i class="fa-solid fa-check" style="color:var(--accent-mint);"></i> Instant 45-Min Result</li>
+                <li><i class="fa-solid fa-check" style="color:var(--accent-mint);"></i> Zero Enamel Sensitivity</li>
+              </ul>
+            </div>
+            <div class="service-meta">
+              <a href="/booking.html?service=Laser%20Teeth%20Whitening" class="btn btn-primary book-proc-btn" data-service="Laser Teeth Whitening" style="width:100%; text-decoration:none;">
+                Book Consultation
+              </a>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Glass Footer -->
+  <footer class="glass-footer">
+    <div class="footer-grid">
+      <div class="reveal-up">
+        <a href="/index.html" class="brand-logo" style="margin-bottom:1rem; display:inline-flex;">
+          <div class="logo-img-wrapper"><img src="/assets/clinic_logo.png" alt="Logo"></div>
+          <div class="brand-text">
+            <div class="brand-main-title">Smile<span class="gradient-text-glow">On</span></div>
+            <div class="brand-tagline">Dental Care &bull; Keep Your Smile On</div>
+          </div>
+        </a>
+        <p style="color:var(--text-muted); font-size:0.95rem; line-height:1.7;">
+          Smile On Complete Dental Care in Marathahalli, Bangalore. Directed by Dr. Neha Sarda (18+ Yrs Exp) & Dr.
+          Shivani Kasundra (Root Canal Specialist). Specializing in Cosmetic Dentistry, Clear Braces, Dental Implants &
+          Digital Endo-Surgery.
+        </p>
+      </div>
+
+      <div class="footer-col reveal-up">
+        <h4>Navigation</h4>
+        <ul class="footer-links">
+          <li><a href="/index.html">Home</a></li>
+          <li><a href="/about.html">About Us</a></li>
+          <li><a href="/doctors.html">Our Doctors</a></li>
+          <li><a href="/services.html">Services</a></li>
+          <li><a href="/booking.html">Contacts & Booking</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col reveal-up">
+        <h4>Services</h4>
+        <ul class="footer-links">
+          <li><a href="/services.html">Scaling & Polishing</a></li>
+          <li><a href="/services.html">Invisible Clear Braces</a></li>
+          <li><a href="/services.html">Dental Implants</a></li>
+          <li><a href="/services.html">Root Canal & Endo-Surgery</a></li>
+          <li><a href="/services.html">Porcelain Laminates</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col reveal-up">
+        <h4>Clinic Helpline</h4>
+        <p style="color:var(--text-muted); font-size:0.9rem; line-height:1.7;">
+          Smile On Complete Dental Care<br>
+          Marathahalli, Bangalore,<br>
+          Karnataka 560037<br><br>
+          <a href="tel:+918123253455" style="color:var(--accent-cyan); text-decoration:none; font-weight:600;">
+            <i class="fa-solid fa-phone"></i> Call 08123253455
+          </a><br>
+          <a href="https://maps.app.goo.gl/tispC6PK6yfJVtbJ8" target="_blank"
+            style="color:var(--accent-mint); text-decoration:none;">
+            <i class="fa-solid fa-map-pin"></i> View Google Maps
+          </a>
+        </p>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div>&copy; 2026 Smile On Complete Dental Care. All Rights Reserved.</div>
+    </div>
+  </footer>
+
+  <!-- Application Logic -->
+  <script type="module" src="/main.js"></script>
+</body>
+
+</html>

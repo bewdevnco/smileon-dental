@@ -100,7 +100,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Trigger reveal animations on active page elements
   function triggerActiveViewReveals() {
-    const activeView = document.querySelector('.page-view.active-view');
+    const activeView = document.querySelector('.page-view.active-view') || document.querySelector('.page-view');
     if (activeView) {
       const elements = activeView.querySelectorAll(
         '.reveal-text, .reveal-up, .reveal-left, .reveal-right, .reveal-scale, .reveal-tilt, .reveal-flip'
@@ -117,44 +117,43 @@ document.addEventListener('DOMContentLoaded', () => {
   initRevealAnimations();
   triggerActiveViewReveals();
 
-  // --- 4. Router & Page View Navigation System ---
-  const pageViews = document.querySelectorAll('.page-view');
-
-  function handleRouting() {
-    let hash = window.location.hash || '#home';
-    const targetId = hash.replace('#', '');
-
-    let found = false;
-    pageViews.forEach(view => {
-      if (view.id === targetId) {
-        view.classList.add('active-view');
-        found = true;
-      } else {
-        view.classList.remove('active-view');
-      }
-    });
-
-    if (!found && pageViews.length > 0) {
-      pageViews[0].classList.add('active-view');
+  // --- 4. Navigation & URL Parameter Pre-fill System ---
+  const currentPath = window.location.pathname.toLowerCase();
+  document.querySelectorAll('.nav-links a').forEach(link => {
+    const href = (link.getAttribute('href') || '').toLowerCase();
+    if (href === currentPath || (href.endsWith('index.html') && (currentPath === '/' || currentPath === '')) || (currentPath.endsWith(href))) {
+      link.classList.add('active');
     }
+  });
 
-    // Highlight active nav item
-    document.querySelectorAll('.nav-item a').forEach(link => {
-      if (link.getAttribute('href') === hash) {
-        link.classList.add('active');
-      } else {
-        link.classList.remove('active');
+  // Pre-fill URL Query Parameters on Booking Page
+  const urlParams = new URLSearchParams(window.location.search);
+  const paramDoctor = urlParams.get('doctor');
+  const paramService = urlParams.get('service');
+
+  if (paramDoctor) {
+    const selectEl = document.getElementById('bookDoctorSelect');
+    if (selectEl) {
+      for (let i = 0; i < selectEl.options.length; i++) {
+        if (selectEl.options[i].value.toLowerCase().includes(paramDoctor.toLowerCase())) {
+          selectEl.selectedIndex = i;
+          break;
+        }
       }
-    });
-
-    window.scrollTo({ top: 0, behavior: 'instant' });
-
-    // Trigger dynamic reveal sequence for newly active page view
-    triggerActiveViewReveals();
+    }
   }
 
-  window.addEventListener('hashchange', handleRouting);
-  handleRouting(); // Initial run
+  if (paramService) {
+    const selectEl = document.getElementById('bookServiceSelect');
+    if (selectEl) {
+      for (let i = 0; i < selectEl.options.length; i++) {
+        if (selectEl.options[i].value.toLowerCase().includes(paramService.toLowerCase())) {
+          selectEl.selectedIndex = i;
+          break;
+        }
+      }
+    }
+  }
 
   // --- 5. Interactive Before & After Smile Slider ---
   const baSlider = document.getElementById('baSlider');
@@ -256,34 +255,22 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // --- 8. Quick Doctor & Procedure Pre-fill to Booking ---
   document.querySelectorAll('.book-doc-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
+    btn.addEventListener('click', (e) => {
       const docName = btn.getAttribute('data-doctor');
-      const selectEl = document.getElementById('bookDoctorSelect');
-      if (selectEl && docName) {
-        for (let i = 0; i < selectEl.options.length; i++) {
-          if (selectEl.options[i].value.toLowerCase().includes(docName.toLowerCase())) {
-            selectEl.selectedIndex = i;
-            break;
-          }
-        }
+      if (docName && !window.location.pathname.endsWith('booking.html')) {
+        e.preventDefault();
+        window.location.href = `/booking.html?doctor=${encodeURIComponent(docName)}`;
       }
-      window.location.hash = '#booking';
     });
   });
 
   document.querySelectorAll('.book-proc-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
+    btn.addEventListener('click', (e) => {
       const serviceName = btn.getAttribute('data-service');
-      const selectEl = document.getElementById('bookServiceSelect');
-      if (selectEl && serviceName) {
-        for (let i = 0; i < selectEl.options.length; i++) {
-          if (selectEl.options[i].value.toLowerCase().includes(serviceName.toLowerCase())) {
-            selectEl.selectedIndex = i;
-            break;
-          }
-        }
+      if (serviceName && !window.location.pathname.endsWith('booking.html')) {
+        e.preventDefault();
+        window.location.href = `/booking.html?service=${encodeURIComponent(serviceName)}`;
       }
-      window.location.hash = '#booking';
     });
   });
 
@@ -429,10 +416,9 @@ document.addEventListener('DOMContentLoaded', () => {
   if (closeModalBtn) {
     closeModalBtn.addEventListener('click', () => {
       bookingSuccessModal.classList.remove('active');
-      bookingWizardForm.reset();
-      showStep(1);
-      window.location.hash = '#home';
-      showToast('Appointment summary generated and dispatched to WhatsApp!', 'success');
+      if (bookingWizardForm) bookingWizardForm.reset();
+      if (typeof showStep === 'function') showStep(1);
+      window.location.href = '/index.html';
     });
   }
 
