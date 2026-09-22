@@ -422,7 +422,49 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // --- 11. Notification Toast Helper ---
+  // --- 11. Blog & FAQ Topic Filter & Expand Interaction ---
+  const blogFilterBtns = document.querySelectorAll('.blog-filter-btn');
+  const blogCards = document.querySelectorAll('.blog-card');
+  const blogExpandBtns = document.querySelectorAll('.blog-expand-btn');
+
+  if (blogFilterBtns.length > 0 && blogCards.length > 0) {
+    blogFilterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        blogFilterBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        const filter = btn.getAttribute('data-filter');
+        blogCards.forEach(card => {
+          const category = card.getAttribute('data-category');
+          if (filter === 'all' || category === filter) {
+            card.style.display = 'flex';
+            card.classList.add('revealed');
+          } else {
+            card.style.display = 'none';
+          }
+        });
+      });
+    });
+  }
+
+  if (blogExpandBtns.length > 0) {
+    blogExpandBtns.forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const card = btn.closest('.blog-card');
+        if (card) {
+          const isExpanded = card.classList.toggle('active-expanded');
+          btn.setAttribute('aria-expanded', isExpanded ? 'true' : 'false');
+          const btnText = btn.querySelector('span');
+          if (btnText) {
+            btnText.textContent = isExpanded ? 'Hide Details' : 'Read Details & Doctor Advice';
+          }
+        }
+      });
+    });
+  }
+
+  // --- 12. Notification Toast Helper ---
   function showToast(message, type = 'info') {
     let container = document.querySelector('.toast-container');
     if (!container) {
