@@ -149,42 +149,44 @@
   </div>
 
   <!-- Main Content Wrapper -->
-  <main class="main-content">
+  <main class="main-content" style="padding-top: 0;">
 
     <!-- IMPACTFUL CENTERED HERO SECTION -->
-    <section class="section blog-hero-section reveal-up" style="padding-top: 2.5rem; padding-bottom: 1.5rem; display: flex; justify-content: center; width: 100%;">
-      <div class="hero-container text-center" style="max-width: 780px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; justify-content: center; width: 100%;">
+    <section class="section blog-hero-section reveal-up" style="padding-top: 10.5rem; padding-bottom: 6rem; display: flex; justify-content: center; width: 100%; background: linear-gradient(rgba(10, 15, 30, 0.75), rgba(10, 15, 30, 0.85)), url('/assets/drnehaworkBG.jpg') no-repeat center center / cover; position: relative; border-bottom: 1px solid rgba(255,255,255,0.1); border-radius: 0 0 2rem 2rem; box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
+      <div class="hero-container text-center" style="max-width: 780px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; justify-content: center; width: 100%; position: relative; z-index: 1;">
         
         <!-- Impact Badge -->
-        <div class="impact-hero-badge">
+        <div class="impact-hero-badge" style="background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255, 255, 255, 0.2); color: #ffffff; backdrop-filter: blur(8px);">
           <i class="fa-solid fa-user-doctor text-cyan"></i>
           <span>Doctor-Verified Dental Guides & FAQs</span>
         </div>
 
-        <h1 class="hero-title" style="margin-bottom: 0.75rem; text-align: center; font-size: clamp(2rem, 5vw, 2.8rem);">
+        <h1 class="hero-title" style="margin-bottom: 0.75rem; text-align: center; font-size: clamp(2rem, 5vw, 2.8rem); color: #ffffff; text-shadow: 0 2px 10px rgba(0,0,0,0.5);">
           Dental Care <span class="gradient-text-glow">Blogs & FAQs</span>
         </h1>
         
-        <p class="hero-subtitle" style="margin: 0 auto 1.5rem auto; font-size: 1.05rem; color: var(--text-muted); text-align: center; max-width: 620px; line-height: 1.6;">
+        <p class="hero-subtitle" style="margin: 0 auto 1.5rem auto; font-size: 1.05rem; color: rgba(255, 255, 255, 0.9); text-align: center; max-width: 620px; line-height: 1.6; text-shadow: 0 1px 5px rgba(0,0,0,0.5);">
           Clear, honest answers to what patients search most about pain-free root canals, teeth cleaning, clear aligners, and dental costs in Marathahalli & Bangalore.
         </p>
 
         <!-- Impact Stat Highlights -->
         <div class="hero-impact-highlights">
-          <div class="impact-chip"><i class="fa-solid fa-circle-check" style="color:var(--accent-mint);"></i> 100% Expert Answers</div>
-          <div class="impact-chip"><i class="fa-solid fa-shield-halved" style="color:var(--accent-cyan);"></i> Pain-Free Care</div>
-          <div class="impact-chip"><i class="fa-brands fa-whatsapp" style="color:#25D366;"></i> Instant WhatsApp Consult</div>
+          <div class="impact-chip" style="background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.15); color: #fff; backdrop-filter: blur(4px);"><i class="fa-solid fa-circle-check" style="color:var(--accent-mint);"></i> 100% Expert Answers</div>
+          <div class="impact-chip" style="background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.15); color: #fff; backdrop-filter: blur(4px);"><i class="fa-solid fa-shield-halved" style="color:var(--accent-cyan);"></i> Pain-Free Care</div>
+          <div class="impact-chip" style="background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.15); color: #fff; backdrop-filter: blur(4px);"><i class="fa-brands fa-whatsapp" style="color:#25D366;"></i> Instant WhatsApp Consult</div>
         </div>
+      </div>
+    </section>
 
-        <!-- Topic Filter Buttons -->
-        <div class="blog-filter-bar reveal-up" style="margin-top: 1.5rem;">
-          <button class="blog-filter-btn active" data-filter="all"><i class="fa-solid fa-layer-group"></i> All Topics</button>
-          <button class="blog-filter-btn" data-filter="rct"><i class="fa-solid fa-tooth"></i> Root Canal</button>
-          <button class="blog-filter-btn" data-filter="cleaning"><i class="fa-solid fa-sparkles"></i> Teeth Cleaning</button>
-          <button class="blog-filter-btn" data-filter="aligners"><i class="fa-solid fa-teeth-open"></i> Aligners</button>
-          <button class="blog-filter-btn" data-filter="implants"><i class="fa-solid fa-screwdriver"></i> Implants</button>
-          <button class="blog-filter-btn" data-filter="emergency"><i class="fa-solid fa-kit-medical"></i> Emergency</button>
-        </div>
+    <!-- Topic Filter Buttons -->
+    <section style="padding: 2rem 1rem 0 1rem; display: flex; justify-content: center; width: 100%;">
+      <div class="blog-filter-bar reveal-up" style="position: relative; z-index: 10; background: var(--bg-card); padding: 0.75rem 1rem; border-radius: 100px; box-shadow: 0 8px 25px rgba(0,0,0,0.1); border: 1px solid var(--border-color); display: flex; flex-wrap: wrap; justify-content: center; gap: 0.5rem;">
+        <button class="blog-filter-btn active" data-filter="all"><i class="fa-solid fa-layer-group"></i> All Topics</button>
+        <button class="blog-filter-btn" data-filter="rct"><i class="fa-solid fa-tooth"></i> Root Canal</button>
+        <button class="blog-filter-btn" data-filter="cleaning"><i class="fa-solid fa-sparkles"></i> Teeth Cleaning</button>
+        <button class="blog-filter-btn" data-filter="aligners"><i class="fa-solid fa-teeth-open"></i> Aligners</button>
+        <button class="blog-filter-btn" data-filter="implants"><i class="fa-solid fa-screwdriver"></i> Implants</button>
+        <button class="blog-filter-btn" data-filter="emergency"><i class="fa-solid fa-kit-medical"></i> Emergency</button>
       </div>
     </section>
 

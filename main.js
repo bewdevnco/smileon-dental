@@ -488,4 +488,144 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 3500);
   }
 
+  // --- 13. Mobile Hero Stats Damped Smooth Jump Centered on Each Stat ---
+  function initMobileStatsAutoScroll() {
+    const statsGrid = document.querySelector('.hero-stats-grid');
+    if (!statsGrid) return;
+
+    // Remove any previously created clone elements
+    const existingClones = statsGrid.querySelectorAll('.stat-clone');
+    existingClones.forEach(el => el.remove());
+
+    const originalCards = Array.from(statsGrid.querySelectorAll('.stat-box'));
+    if (!originalCards.length) return;
+
+    const totalOriginal = originalCards.length;
+    let isUserInteracting = false;
+    let currentIndex = 0;
+    let jumpTimer = null;
+
+    function getCardCenterTarget(card) {
+      if (!card) return 0;
+      return card.offsetLeft - (statsGrid.clientWidth - card.clientWidth) / 2;
+    }
+
+    function setActiveCard(card) {
+      const allCards = statsGrid.querySelectorAll('.stat-box');
+      allCards.forEach(c => {
+        c.classList.remove('stat-active');
+        c.classList.remove('stat-clicked');
+      });
+      if (card) {
+        card.classList.add('stat-active');
+        void card.offsetWidth; // Force reflow
+        card.classList.add('stat-clicked');
+      }
+    }
+
+    function jumpToCard(index) {
+      const cards = statsGrid.querySelectorAll('.stat-box');
+      if (!cards.length) return;
+
+      currentIndex = ((index % totalOriginal) + totalOriginal) % totalOriginal;
+      const targetCard = cards[currentIndex];
+      if (!targetCard) return;
+
+      // Calculate perfect center target position
+      const targetPos = Math.max(0, getCardCenterTarget(targetCard));
+
+      // Update active state visual
+      setActiveCard(targetCard);
+
+      // Perform smooth scrolling to target position
+      statsGrid.scrollTo({
+        left: targetPos,
+        behavior: 'smooth'
+      });
+    }
+
+    function runJumpCycle() {
+      if (isUserInteracting || window.innerWidth > 850) {
+        scheduleNextJump(1500);
+        return;
+      }
+
+      currentIndex = (currentIndex + 1) % totalOriginal;
+      jumpToCard(currentIndex);
+
+      scheduleNextJump(1800); // 1.8s pause at dead center
+    }
+
+    function scheduleNextJump(delay) {
+      clearTimeout(jumpTimer);
+      jumpTimer = setTimeout(runJumpCycle, delay);
+    }
+
+    function startLoop() {
+      clearTimeout(jumpTimer);
+      jumpToCard(0);
+      scheduleNextJump(1800);
+    }
+
+    function stopLoop() {
+      clearTimeout(jumpTimer);
+    }
+
+    let touchTimeout = null;
+    statsGrid.addEventListener('touchstart', () => {
+      isUserInteracting = true;
+      clearTimeout(touchTimeout);
+      clearTimeout(jumpTimer);
+    }, { passive: true });
+
+    statsGrid.addEventListener('touchend', () => {
+      clearTimeout(touchTimeout);
+      touchTimeout = setTimeout(() => {
+        isUserInteracting = false;
+        const currentCards = Array.from(statsGrid.querySelectorAll('.stat-box'));
+        const gridCenter = statsGrid.getBoundingClientRect().left + statsGrid.clientWidth / 2;
+        let closestIdx = 0;
+        let minDiff = Infinity;
+        currentCards.forEach((card, idx) => {
+          const cardCenter = card.getBoundingClientRect().left + card.clientWidth / 2;
+          const diff = Math.abs(gridCenter - cardCenter);
+          if (diff < minDiff) {
+            minDiff = diff;
+            closestIdx = idx;
+          }
+        });
+
+        jumpToCard(closestIdx);
+        scheduleNextJump(1800);
+      }, 400);
+    }, { passive: true });
+
+    // Tap on any card to jump and dead-center it immediately
+    statsGrid.addEventListener('click', (e) => {
+      const card = e.target.closest('.stat-box');
+      if (card) {
+        const cards = Array.from(statsGrid.querySelectorAll('.stat-box'));
+        const clickedIdx = cards.indexOf(card);
+        if (clickedIdx !== -1) {
+          jumpToCard(clickedIdx);
+          scheduleNextJump(1800);
+        }
+      }
+    });
+
+    if (window.innerWidth <= 850) {
+      startLoop();
+    }
+
+    window.addEventListener('resize', () => {
+      if (window.innerWidth <= 850) {
+        startLoop();
+      } else {
+        stopLoop();
+        statsGrid.scrollLeft = 0;
+      }
+    });
+  }
+
+  initMobileStatsAutoScroll();
 });
