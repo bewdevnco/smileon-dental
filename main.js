@@ -488,8 +488,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 3500);
   }
 
-  // --- 13. Mobile Hero Stats Damped Smooth Jump Centered on Each Stat ---
-  function initMobileStatsAutoScroll() {
+  // --- 13. Mobile Hero Stats Single Stationary Box Dynamic Rotation ---
+  function initMobileHeroStats() {
     const statsGrid = document.querySelector('.hero-stats-grid');
     if (!statsGrid) return;
 
@@ -497,135 +497,111 @@ document.addEventListener('DOMContentLoaded', () => {
     const existingClones = statsGrid.querySelectorAll('.stat-clone');
     existingClones.forEach(el => el.remove());
 
-    const originalCards = Array.from(statsGrid.querySelectorAll('.stat-box'));
-    if (!originalCards.length) return;
+    const statBoxes = Array.from(statsGrid.querySelectorAll('.stat-box'));
+    if (!statBoxes.length) return;
 
-    const totalOriginal = originalCards.length;
-    let isUserInteracting = false;
+    // Create micro-indicators inside the box for mobile rotation
+    let indicatorContainer = statsGrid.querySelector('.hero-stats-indicators');
+    if (!indicatorContainer) {
+      indicatorContainer = document.createElement('div');
+      indicatorContainer.className = 'hero-stats-indicators';
+      statBoxes.forEach((_, i) => {
+        const dot = document.createElement('span');
+        dot.className = `hero-stats-dot ${i === 0 ? 'active' : ''}`;
+        indicatorContainer.appendChild(dot);
+      });
+      statsGrid.appendChild(indicatorContainer);
+    }
+
+    const dots = indicatorContainer.querySelectorAll('.hero-stats-dot');
     let currentIndex = 0;
-    let jumpTimer = null;
+    let rotateTimer = null;
+    const ROTATION_INTERVAL = 2800; // 2.8s per stat
 
-    function getCardCenterTarget(card) {
-      if (!card) return 0;
-      return card.offsetLeft - (statsGrid.clientWidth - card.clientWidth) / 2;
-    }
+    function showStat(index, isManual = false) {
+      currentIndex = ((index % statBoxes.length) + statBoxes.length) % statBoxes.length;
 
-    function setActiveCard(card) {
-      const allCards = statsGrid.querySelectorAll('.stat-box');
-      allCards.forEach(c => {
-        c.classList.remove('stat-active');
-        c.classList.remove('stat-clicked');
+      statBoxes.forEach((box, i) => {
+        if (i === currentIndex) {
+          box.classList.add('stat-active');
+        } else {
+          box.classList.remove('stat-active');
+        }
       });
-      if (card) {
-        card.classList.add('stat-active');
-        void card.offsetWidth; // Force reflow
-        card.classList.add('stat-clicked');
+
+      dots.forEach((dot, i) => {
+        dot.classList.toggle('active', i === currentIndex);
+      });
+
+      if (isManual) {
+        scheduleNext(ROTATION_INTERVAL + 1200);
       }
     }
 
-    function jumpToCard(index) {
-      const cards = statsGrid.querySelectorAll('.stat-box');
-      if (!cards.length) return;
+    function scheduleNext(delay = ROTATION_INTERVAL) {
+      clearTimeout(rotateTimer);
+      rotateTimer = setTimeout(() => {
+        if (window.innerWidth <= 850) {
+          showStat(currentIndex + 1);
+          scheduleNext(ROTATION_INTERVAL);
+        }
+      }, delay);
+    }
 
-      currentIndex = ((index % totalOriginal) + totalOriginal) % totalOriginal;
-      const targetCard = cards[currentIndex];
-      if (!targetCard) return;
+    function startRotation() {
+      clearTimeout(rotateTimer);
+      showStat(0);
+      scheduleNext(ROTATION_INTERVAL);
+    }
 
-      // Calculate perfect center target position
-      const targetPos = Math.max(0, getCardCenterTarget(targetCard));
-
-      // Update active state visual
-      setActiveCard(targetCard);
-
-      // Perform smooth scrolling to target position
-      statsGrid.scrollTo({
-        left: targetPos,
-        behavior: 'smooth'
+    function stopRotation() {
+      clearTimeout(rotateTimer);
+      statBoxes.forEach(box => {
+        box.classList.remove('stat-active');
       });
     }
 
-    function runJumpCycle() {
-      if (isUserInteracting || window.innerWidth > 850) {
-        scheduleNextJump(1500);
-        return;
+    // Tap to jump immediately to the next stat on mobile
+    statsGrid.addEventListener('click', () => {
+      if (window.innerWidth <= 850) {
+        showStat(currentIndex + 1, true);
       }
+    });
 
-      currentIndex = (currentIndex + 1) % totalOriginal;
-      jumpToCard(currentIndex);
-
-      scheduleNextJump(1800); // 1.8s pause at dead center
-    }
-
-    function scheduleNextJump(delay) {
-      clearTimeout(jumpTimer);
-      jumpTimer = setTimeout(runJumpCycle, delay);
-    }
-
-    function startLoop() {
-      clearTimeout(jumpTimer);
-      jumpToCard(0);
-      scheduleNextJump(1800);
-    }
-
-    function stopLoop() {
-      clearTimeout(jumpTimer);
-    }
-
-    let touchTimeout = null;
-    statsGrid.addEventListener('touchstart', () => {
-      isUserInteracting = true;
-      clearTimeout(touchTimeout);
-      clearTimeout(jumpTimer);
+    // Touch swipe left/right support on the stationary box
+    let touchStartX = 0;
+    statsGrid.addEventListener('touchstart', (e) => {
+      if (e.touches && e.touches[0]) {
+        touchStartX = e.touches[0].clientX;
+      }
     }, { passive: true });
 
-    statsGrid.addEventListener('touchend', () => {
-      clearTimeout(touchTimeout);
-      touchTimeout = setTimeout(() => {
-        isUserInteracting = false;
-        const currentCards = Array.from(statsGrid.querySelectorAll('.stat-box'));
-        const gridCenter = statsGrid.getBoundingClientRect().left + statsGrid.clientWidth / 2;
-        let closestIdx = 0;
-        let minDiff = Infinity;
-        currentCards.forEach((card, idx) => {
-          const cardCenter = card.getBoundingClientRect().left + card.clientWidth / 2;
-          const diff = Math.abs(gridCenter - cardCenter);
-          if (diff < minDiff) {
-            minDiff = diff;
-            closestIdx = idx;
+    statsGrid.addEventListener('touchend', (e) => {
+      if (window.innerWidth > 850) return;
+      if (e.changedTouches && e.changedTouches[0]) {
+        const touchEndX = e.changedTouches[0].clientX;
+        const diff = touchEndX - touchStartX;
+        if (Math.abs(diff) > 35) {
+          if (diff < 0) {
+            showStat(currentIndex + 1, true);
+          } else {
+            showStat(currentIndex - 1, true);
           }
-        });
-
-        jumpToCard(closestIdx);
-        scheduleNextJump(1800);
-      }, 400);
-    }, { passive: true });
-
-    // Tap on any card to jump and dead-center it immediately
-    statsGrid.addEventListener('click', (e) => {
-      const card = e.target.closest('.stat-box');
-      if (card) {
-        const cards = Array.from(statsGrid.querySelectorAll('.stat-box'));
-        const clickedIdx = cards.indexOf(card);
-        if (clickedIdx !== -1) {
-          jumpToCard(clickedIdx);
-          scheduleNextJump(1800);
         }
       }
-    });
+    }, { passive: true });
 
-    if (window.innerWidth <= 850) {
-      startLoop();
+    function handleResize() {
+      if (window.innerWidth <= 850) {
+        startRotation();
+      } else {
+        stopRotation();
+      }
     }
 
-    window.addEventListener('resize', () => {
-      if (window.innerWidth <= 850) {
-        startLoop();
-      } else {
-        stopLoop();
-        statsGrid.scrollLeft = 0;
-      }
-    });
+    handleResize();
+    window.addEventListener('resize', handleResize);
   }
 
-  initMobileStatsAutoScroll();
+  initMobileHeroStats();
 });
