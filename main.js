@@ -425,7 +425,6 @@ document.addEventListener('DOMContentLoaded', () => {
   // --- 11. Blog & FAQ Topic Filter & Expand Interaction ---
   const blogFilterBtns = document.querySelectorAll('.blog-filter-btn');
   const blogCards = document.querySelectorAll('.blog-card');
-  const blogExpandBtns = document.querySelectorAll('.blog-expand-btn');
 
   if (blogFilterBtns.length > 0 && blogCards.length > 0) {
     blogFilterBtns.forEach(btn => {
@@ -437,7 +436,7 @@ document.addEventListener('DOMContentLoaded', () => {
         blogCards.forEach(card => {
           const category = card.getAttribute('data-category');
           if (filter === 'all' || category === filter) {
-            card.style.display = 'flex';
+            card.style.display = 'block';
             card.classList.add('revealed');
           } else {
             card.style.display = 'none';
@@ -445,22 +444,38 @@ document.addEventListener('DOMContentLoaded', () => {
         });
       });
     });
-  }
 
-  if (blogExpandBtns.length > 0) {
-    blogExpandBtns.forEach(btn => {
-      btn.addEventListener('click', (e) => {
-        e.stopPropagation();
-        const card = btn.closest('.blog-card');
-        if (card) {
-          const isExpanded = card.classList.toggle('active-expanded');
-          btn.setAttribute('aria-expanded', isExpanded ? 'true' : 'false');
-          const btnText = btn.querySelector('span');
-          if (btnText) {
-            btnText.textContent = isExpanded ? 'Hide Details' : 'Read Details & Doctor Advice';
+    blogCards.forEach(card => {
+      const expandBtn = card.querySelector('.blog-expand-btn');
+      const title = card.querySelector('.blog-card-title');
+
+      function toggleCard(e) {
+        if (e) e.preventDefault();
+        const isExpanded = card.classList.contains('is-expanded');
+        
+        if (isExpanded) {
+          card.classList.remove('is-expanded');
+          if (expandBtn) {
+            expandBtn.setAttribute('aria-expanded', 'false');
+            const span = expandBtn.querySelector('span');
+            if (span) span.textContent = 'Read Details & Doctor Advice';
+          }
+        } else {
+          card.classList.add('is-expanded');
+          if (expandBtn) {
+            expandBtn.setAttribute('aria-expanded', 'true');
+            const span = expandBtn.querySelector('span');
+            if (span) span.textContent = 'Close Details';
           }
         }
-      });
+      }
+
+      if (expandBtn) {
+        expandBtn.addEventListener('click', toggleCard);
+      }
+      if (title) {
+        title.addEventListener('click', toggleCard);
+      }
     });
   }
 
@@ -605,3 +620,4 @@ document.addEventListener('DOMContentLoaded', () => {
 
   initMobileHeroStats();
 });
+
