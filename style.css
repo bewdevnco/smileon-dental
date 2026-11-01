@@ -3016,3 +3016,646 @@ img {
     padding: 2rem 1.25rem;
   }
 }
+
+/* ==========================================================================
+   Our Impact - Sri Sathya Sai Hospital Smile Corrections & Seva Page
+   ========================================================================== */
+
+.impact-page-container {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 3.5rem 1.5rem 5rem;
+}
+
+.impact-hero-grid {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 3rem;
+  align-items: center;
+  margin-bottom: 4rem;
+}
+
+.impact-hero-img-wrapper {
+  position: relative;
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+  border: 4px solid var(--bg-surface);
+  max-width: 440px;
+  margin: 0 auto;
+  height: 480px;
+  background: var(--bg-surface-elevated);
+}
+
+.impact-hero-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 20%;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  display: block;
+}
+
+.impact-hero-img-wrapper:hover .impact-hero-img {
+  transform: scale(1.04);
+}
+
+.impact-hero-badge {
+  position: absolute;
+  bottom: 1.25rem;
+  left: 1.25rem;
+  right: 1.25rem;
+  background: rgba(18, 32, 34, 0.88);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+  padding: 0.85rem 1.15rem;
+  border-radius: var(--radius-md);
+  font-size: 0.88rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+}
+
+.impact-hero-badge i {
+  color: #5eead4;
+  font-size: 1.1rem;
+}
+
+.impact-quote-card {
+  border-left: 4px solid var(--theme-teal);
+  background: var(--bg-mint-card);
+  padding: 1.25rem 1.5rem;
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+  margin: 1.5rem 0;
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 1.1rem;
+  color: var(--text-heading);
+  line-height: 1.6;
+}
+
+.impact-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.5rem;
+  margin: 3.5rem 0;
+}
+
+.impact-stat-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-lg);
+  padding: 2rem 1.5rem;
+  text-align: center;
+  box-shadow: var(--shadow-sm);
+  transition: all var(--transition-normal);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.impact-stat-card:hover {
+  transform: translateY(-5px);
+  border-color: var(--theme-teal);
+  box-shadow: var(--shadow-md);
+}
+
+.impact-stat-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: var(--theme-teal-light);
+  color: var(--theme-teal);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+[data-theme="dark"] .impact-stat-icon {
+  background: rgba(56, 155, 148, 0.2);
+}
+
+.impact-stat-number {
+  font-family: var(--font-serif);
+  font-size: 2.4rem;
+  font-weight: 700;
+  color: var(--theme-teal);
+  line-height: 1.1;
+  margin-bottom: 0.35rem;
+}
+
+.impact-stat-label {
+  font-family: var(--font-sans);
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--text-heading);
+  margin-bottom: 0.25rem;
+}
+
+.impact-stat-sub {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+/* --- Empty Image Placeholder System --- */
+.impact-placeholder {
+  position: relative;
+  background: rgba(56, 155, 148, 0.04);
+  border: 2px dashed rgba(56, 155, 148, 0.4);
+  border-radius: var(--radius-md);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 2rem 1.5rem;
+  min-height: 240px;
+  transition: all var(--transition-normal);
+  overflow: hidden;
+  user-select: none;
+}
+
+[data-theme="dark"] .impact-placeholder {
+  background: rgba(56, 155, 148, 0.07);
+  border-color: rgba(56, 155, 148, 0.35);
+}
+
+.impact-placeholder:hover {
+  border-color: var(--theme-teal);
+  background: rgba(56, 155, 148, 0.08);
+  box-shadow: 0 4px 20px rgba(56, 155, 148, 0.1);
+}
+
+.impact-placeholder.hero-placeholder {
+  min-height: 420px;
+  border-radius: var(--radius-lg);
+}
+
+.impact-placeholder.case-placeholder {
+  min-height: 250px;
+  height: 100%;
+}
+
+.impact-placeholder.gallery-placeholder {
+  min-height: 320px;
+  height: 100%;
+}
+
+.placeholder-icon-circle {
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  background: var(--theme-teal-light);
+  color: var(--theme-teal);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+  margin-bottom: 0.9rem;
+  box-shadow: 0 4px 12px rgba(56, 155, 148, 0.12);
+  transition: transform var(--transition-fast);
+}
+
+[data-theme="dark"] .placeholder-icon-circle {
+  background: rgba(56, 155, 148, 0.25);
+  color: #6ee7b7;
+}
+
+.impact-placeholder:hover .placeholder-icon-circle {
+  transform: scale(1.1);
+}
+
+.placeholder-title {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--text-heading);
+  margin-bottom: 0.4rem;
+  max-width: 90%;
+  line-height: 1.4;
+}
+
+.placeholder-desc {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  margin-bottom: 0.85rem;
+  max-width: 85%;
+  line-height: 1.45;
+}
+
+.placeholder-meta-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--theme-teal);
+  background: var(--bg-surface);
+  border: 1px solid rgba(56, 155, 148, 0.3);
+  padding: 0.3rem 0.75rem;
+  border-radius: var(--radius-pill);
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+
+/* Comparison Badges */
+.placeholder-tag-before {
+  color: #c2410c;
+  background: #fff7ed;
+  border-color: #fdba74;
+}
+
+[data-theme="dark"] .placeholder-tag-before {
+  background: rgba(194, 65, 12, 0.18);
+  border-color: rgba(253, 186, 116, 0.3);
+  color: #fb923c;
+}
+
+.placeholder-tag-after {
+  color: #047857;
+  background: #ecfdf5;
+  border-color: #6ee7b7;
+}
+
+[data-theme="dark"] .placeholder-tag-after {
+  background: rgba(4, 120, 87, 0.18);
+  border-color: rgba(110, 231, 183, 0.3);
+  color: #34d399;
+}
+
+/* --- Pillars Grid --- */
+.impact-pillars-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+  margin-bottom: 4rem;
+}
+
+.impact-pillar-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-lg);
+  padding: 2.25rem 1.75rem;
+  transition: all var(--transition-normal);
+  display: flex;
+  flex-direction: column;
+}
+
+.impact-pillar-card:hover {
+  transform: translateY(-5px);
+  border-color: var(--theme-teal);
+  box-shadow: var(--shadow-md);
+}
+
+.impact-pillar-icon {
+  width: 52px;
+  height: 52px;
+  border-radius: var(--radius-md);
+  background: var(--theme-teal-light);
+  color: var(--theme-teal);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+  margin-bottom: 1.25rem;
+}
+
+[data-theme="dark"] .impact-pillar-icon {
+  background: rgba(56, 155, 148, 0.2);
+}
+
+.impact-pillar-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text-heading);
+  margin-bottom: 0.75rem;
+}
+
+.impact-pillar-desc {
+  font-size: 0.95rem;
+  color: var(--text-body);
+  line-height: 1.7;
+  margin-bottom: 1.25rem;
+  flex-grow: 1;
+}
+
+.impact-pillar-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  border-top: 1px solid var(--border-light);
+  padding-top: 1rem;
+}
+
+.impact-pillar-list li {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.impact-pillar-list li i {
+  color: var(--theme-teal);
+  font-size: 0.8rem;
+}
+
+/* --- Transformation Photos Showcase --- */
+.impact-transformations-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 480px), 1fr));
+  gap: 2rem;
+  margin-bottom: 3.5rem;
+}
+
+.impact-transform-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-lg);
+  padding: 1.25rem;
+  box-shadow: var(--shadow-sm);
+  transition: all var(--transition-normal);
+  display: flex;
+  flex-direction: column;
+}
+
+.impact-transform-card:hover {
+  border-color: rgba(56, 155, 148, 0.4);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-4px);
+}
+
+.impact-transform-pair {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.impact-photo-frame {
+  position: relative;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  background: var(--bg-surface-elevated);
+  border: 1px solid var(--border-light);
+  box-shadow: var(--shadow-sm);
+  aspect-ratio: 3 / 4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.impact-photo-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  transition: transform 0.5s ease;
+}
+
+.impact-photo-frame:hover .impact-photo-img {
+  transform: scale(1.03);
+}
+
+.photo-state-badge {
+  position: absolute;
+  top: 0.75rem;
+  left: 0.75rem;
+  z-index: 2;
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 0.28rem 0.75rem;
+  border-radius: var(--radius-pill);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+
+.photo-state-badge.badge-before {
+  background: rgba(220, 38, 38, 0.88);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.photo-state-badge.badge-after {
+  background: rgba(16, 185, 129, 0.88);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+/* --- Gallery Grid & Real Photo Cards --- */
+.impact-gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+  margin: 2.5rem 0 4rem;
+}
+
+.impact-gallery-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  transition: all var(--transition-normal);
+  display: flex;
+  flex-direction: column;
+}
+
+.impact-gallery-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--theme-teal);
+  box-shadow: var(--shadow-md);
+}
+
+.impact-gallery-img-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 320px;
+  overflow: hidden;
+  background: var(--bg-surface-elevated);
+}
+
+.impact-gallery-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 25%;
+  transition: transform 0.6s ease;
+  display: block;
+}
+
+.impact-gallery-card:hover .impact-gallery-img {
+  transform: scale(1.05);
+}
+
+.impact-gallery-overlay {
+  position: absolute;
+  bottom: 0.85rem;
+  left: 0.85rem;
+  z-index: 2;
+}
+
+.impact-gallery-badge {
+  display: inline-flex;
+  align-items: center;
+  background: rgba(18, 32, 34, 0.82);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 0.35rem 0.8rem;
+  border-radius: var(--radius-pill);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+}
+
+/* --- Seva Philosophy Highlight Box --- */
+.impact-seva-box {
+  background: linear-gradient(135deg, var(--theme-teal-darker) 0%, var(--theme-teal) 100%);
+  border-radius: var(--radius-xl);
+  padding: 3.5rem 2.5rem;
+  color: #ffffff;
+  position: relative;
+  overflow: hidden;
+  margin: 4rem 0;
+  box-shadow: var(--shadow-lg);
+}
+
+.impact-seva-box::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -20%;
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.15) 0%, transparent 70%);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.impact-seva-content {
+  position: relative;
+  z-index: 2;
+  max-width: 900px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.impact-seva-title {
+  font-family: var(--font-serif);
+  font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 1rem;
+}
+
+.impact-seva-text {
+  font-size: 1.05rem;
+  line-height: 1.8;
+  color: #e2f5f1;
+  margin-bottom: 2rem;
+}
+
+.impact-cta-banner {
+  background: linear-gradient(135deg, var(--bg-mint-card), var(--bg-surface));
+  border: 1px solid rgba(56, 155, 148, 0.3);
+  border-radius: var(--radius-xl);
+  padding: 3.5rem 2.5rem;
+  text-align: center;
+  box-shadow: var(--shadow-md);
+  margin-top: 4rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.impact-cta-banner::before {
+  content: '';
+  position: absolute;
+  top: -60px;
+  right: -60px;
+  width: 200px;
+  height: 200px;
+  background: radial-gradient(circle, rgba(56, 155, 148, 0.12) 0%, transparent 70%);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.impact-cta-banner h2 {
+  font-family: var(--font-serif);
+  font-size: clamp(1.8rem, 3.5vw, 2.4rem);
+  font-weight: 700;
+  color: var(--text-heading);
+  margin-bottom: 0.85rem;
+}
+
+.impact-cta-banner p {
+  font-size: 1.05rem;
+  color: var(--text-body);
+  line-height: 1.8;
+  max-width: 720px;
+  margin: 0 auto 2.25rem;
+}
+
+.impact-hero-desktop-visual {
+  display: block;
+}
+
+.impact-hero-mobile-visual {
+  display: none;
+}
+
+/* --- Responsive Adjustments --- */
+@media (max-width: 992px) {
+  .impact-hero-grid {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+
+  .impact-hero-desktop-visual {
+    display: none;
+  }
+
+  .impact-hero-mobile-visual {
+    display: block;
+    margin: 1.5rem 0 1.25rem;
+  }
+
+  .impact-hero-mobile-visual .impact-hero-img-wrapper {
+    max-width: 100%;
+    height: 380px;
+  }
+
+  .impact-transformations-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .impact-page-container {
+    padding: 2.5rem 1rem 4rem;
+  }
+
+  .impact-hero-mobile-visual .impact-hero-img-wrapper {
+    height: 320px;
+  }
+
+  .impact-seva-box {
+    padding: 2.5rem 1.5rem;
+  }
+
+  .impact-transform-pair {
+    grid-template-columns: 1fr;
+  }
+}
