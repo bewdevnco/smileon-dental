@@ -42,38 +42,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // --- 2. Light & Dark Theme Toggle System ---
-  const themeToggleBtn = document.getElementById('themeToggleBtn');
-  const themeToggleIcon = document.getElementById('themeToggleIcon');
-
-  function applyTheme(theme) {
-    document.documentElement.setAttribute('data-theme', theme);
-    localStorage.setItem('smileon-theme', theme);
-
-    if (themeToggleIcon) {
-      if (theme === 'light') {
-        themeToggleIcon.className = 'fa-solid fa-moon';
-        themeToggleBtn.setAttribute('title', 'Switch to Dark Mode');
-      } else {
-        themeToggleIcon.className = 'fa-solid fa-sun';
-        themeToggleBtn.setAttribute('title', 'Switch to Light Mode');
-      }
-    }
-  }
-
-  // Load saved theme or default to light
-  const savedTheme = localStorage.getItem('smileon-theme') || 'light';
-  applyTheme(savedTheme);
-
-  if (themeToggleBtn) {
-    themeToggleBtn.addEventListener('click', () => {
-      const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
-      const nextTheme = currentTheme === 'dark' ? 'light' : 'dark';
-      applyTheme(nextTheme);
-    });
-  }
-
-  // --- 3. Scroll & Intersection Observer Text Reveal Animations ---
+  // --- 2. Scroll & Intersection Observer Text Reveal Animations ---
   function initRevealAnimations() {
     const revealElements = document.querySelectorAll(
       '.reveal-text, .reveal-up, .reveal-left, .reveal-right, .reveal-scale, .reveal-tilt, .reveal-flip'
