@@ -698,15 +698,25 @@ img {
 }
 
 .hero-img-card.large {
-  height: 380px;
+  height: 396px;
 }
 
 .hero-img-card.small-top {
-  height: 180px;
+  height: 220px;
+}
+
+.hero-img-card.small-top img {
+  object-fit: cover;
+  object-position: center center;
 }
 
 .hero-img-card.small-bottom {
-  height: 190px;
+  height: 160px;
+}
+
+.hero-img-card.small-bottom img {
+  object-fit: cover;
+  object-position: center 30%;
 }
 
 .floating-schedule-card {
@@ -2514,12 +2524,15 @@ img {
   }
 
   .hero-img-card.large {
-    height: 280px;
+    height: 310px;
   }
 
-  .hero-img-card.small-top,
+  .hero-img-card.small-top {
+    height: 165px;
+  }
+
   .hero-img-card.small-bottom {
-    height: 135px;
+    height: 130px;
   }
 
   .expert-feature-box,
