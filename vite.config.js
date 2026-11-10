@@ -12,6 +12,7 @@ export default defineConfig({
         impact: resolve(__dirname, 'impact.html'),
         booking: resolve(__dirname, 'booking.html'),
         blogs: resolve(__dirname, 'blogs.html'),
+        privacy: resolve(__dirname, 'privacy.html'),
       },
     },
   },

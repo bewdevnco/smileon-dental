@@ -142,6 +142,11 @@ img {
   font-weight: 700;
 }
 
+.serif-bold {
+  font-family: var(--font-serif);
+  font-weight: 700;
+}
+
 .serif-teal {
   font-family: var(--font-serif);
   font-style: normal;
@@ -625,8 +630,8 @@ img {
    ========================================================================== */
 .hero-section-grid {
   display: grid;
-  grid-template-columns: 1.05fr 1fr;
-  gap: 3rem;
+  grid-template-columns: 1fr 1.12fr;
+  gap: 3.5rem;
   align-items: center;
   padding: 2.5rem 0 2rem;
 }
@@ -638,17 +643,18 @@ img {
 }
 
 .hero-main-title {
-  font-size: clamp(2.2rem, 5.5vw, 3.6rem);
+  font-size: clamp(2.5rem, 5.5vw, 3.8rem);
   font-weight: 700;
   line-height: 1.15;
   color: var(--text-heading);
+  letter-spacing: -0.01em;
 }
 
 .hero-subtext {
   font-size: 1.1rem;
   color: var(--text-body);
   line-height: 1.75;
-  max-width: 520px;
+  max-width: 540px;
 }
 
 .hero-cta-group {
@@ -657,6 +663,28 @@ img {
   gap: 1rem;
   flex-wrap: wrap;
   margin-top: 0.5rem;
+}
+
+.hero-trust-metrics {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  flex-wrap: wrap;
+  margin-top: 0.35rem;
+  font-size: 0.88rem;
+  color: var(--text-body);
+}
+
+.hero-trust-metric {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.hero-trust-sep {
+  color: var(--border-teal);
+  opacity: 0.6;
+  font-weight: 700;
 }
 
 .hero-visual-col {
@@ -668,13 +696,13 @@ img {
 .hero-collage-wrapper {
   position: relative;
   width: 100%;
-  max-width: 520px;
+  max-width: 630px;
 }
 
 .hero-image-grid {
   display: grid;
-  grid-template-columns: 1.2fr 1fr;
-  grid-gap: 1rem;
+  grid-template-columns: 1.25fr 1fr;
+  grid-gap: 1.25rem;
   align-items: center;
 }
 
@@ -698,11 +726,11 @@ img {
 }
 
 .hero-img-card.large {
-  height: 396px;
+  height: 490px;
 }
 
 .hero-img-card.small-top {
-  height: 220px;
+  height: 270px;
 }
 
 .hero-img-card.small-top img {
@@ -711,7 +739,7 @@ img {
 }
 
 .hero-img-card.small-bottom {
-  height: 160px;
+  height: 200px;
 }
 
 .hero-img-card.small-bottom img {
@@ -839,6 +867,16 @@ img {
   flex-shrink: 0;
 }
 
+.teal-step-eyebrow {
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: rgba(255, 255, 255, 0.85);
+  margin-bottom: 0.2rem;
+}
+
 .teal-feature-text h3 {
   font-family: var(--font-sans);
   font-size: 1.05rem;
@@ -913,8 +951,58 @@ img {
   box-shadow: var(--shadow-md);
   border: 4px solid var(--bg-surface);
   width: 100%;
-  height: 340px;
+  height: 380px;
   object-fit: cover;
+}
+
+.difference-feature-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  margin: 1.5rem 0 2rem;
+}
+
+.diff-feature-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.diff-feature-icon {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: var(--theme-teal-light);
+  color: var(--theme-teal);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.15rem;
+  flex-shrink: 0;
+  margin-top: 0.15rem;
+  transition: all var(--transition-fast);
+}
+
+.diff-feature-item:hover .diff-feature-icon {
+  background: var(--theme-teal);
+  color: #ffffff;
+  transform: scale(1.08);
+}
+
+.diff-feature-text h4 {
+  font-family: var(--font-sans);
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--text-heading);
+  margin-bottom: 0.25rem;
+  line-height: 1.3;
+}
+
+.diff-feature-text p {
+  font-size: 0.92rem !important;
+  color: var(--text-body) !important;
+  line-height: 1.55 !important;
+  margin: 0 !important;
 }
 
 .difference-floating-badge {
@@ -986,8 +1074,8 @@ img {
   color: var(--theme-teal-dark);
   font-size: 0.78rem;
   font-weight: 700;
-  padding: 0.35rem 0.85rem;
-  border-radius: var(--radius-pill);
+  padding: 0.35rem 0.75rem;
+  border-radius: var(--radius-xs);
   box-shadow: var(--shadow-sm);
 }
 
@@ -1526,6 +1614,41 @@ img {
   width: 100%;
 }
 
+.mint-survey-card.emergency-highlight {
+  border: 2px solid var(--theme-teal);
+  background: linear-gradient(180deg, #ffffff 0%, var(--bg-mint-card) 100%);
+  position: relative;
+}
+
+.emergency-badge {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: #fef2f2;
+  color: #dc2626;
+  border: 1px solid #fecaca;
+  font-size: 0.75rem;
+  font-weight: 800;
+  padding: 0.3rem 0.75rem;
+  border-radius: var(--radius-pill);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.verified-patient-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--theme-teal);
+  background: var(--theme-teal-light);
+  padding: 0.2rem 0.55rem;
+  border-radius: var(--radius-pill);
+  margin-top: 0.25rem;
+}
+
 /* ==========================================================================
    Section: "Speak to experts"
    ========================================================================== */
@@ -1696,11 +1819,19 @@ img {
   background: var(--theme-teal-light);
   border-radius: var(--radius-lg);
   border: 1px solid rgba(56, 155, 148, 0.3);
-  padding: 2rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+  position: relative;
+  min-height: 420px;
+  height: 100%;
+}
+
+.map-card-wrapper iframe {
+  width: 100%;
+  height: 100%;
+  min-height: 420px;
+  border: 0;
+  display: block;
 }
 
 .map-placeholder-glass h3 {
@@ -2443,6 +2574,11 @@ img {
 }
 
 @media (max-width: 768px) {
+  .hero-main-title {
+    font-size: clamp(2.5rem, 7.5vw, 3.2rem);
+    line-height: 1.12;
+  }
+
   .section-container {
     padding: 2.75rem 1.15rem;
   }
@@ -2513,6 +2649,11 @@ img {
     max-width: 100%;
   }
 
+  .hero-trust-metrics {
+    gap: 0.5rem;
+    font-size: 0.82rem;
+  }
+
   .stats-metrics-row {
     grid-template-columns: repeat(2, 1fr);
     gap: 1.5rem;
@@ -2524,15 +2665,15 @@ img {
   }
 
   .hero-img-card.large {
-    height: 310px;
+    height: 400px;
   }
 
   .hero-img-card.small-top {
-    height: 165px;
+    height: 220px;
   }
 
   .hero-img-card.small-bottom {
-    height: 130px;
+    height: 165px;
   }
 
   .expert-feature-box,
@@ -2551,7 +2692,8 @@ img {
   }
 
   .hero-main-title {
-    font-size: 2.1rem;
+    font-size: clamp(2.45rem, 8.5vw, 2.9rem);
+    line-height: 1.12;
   }
 
   .stats-metrics-row {
@@ -3830,5 +3972,97 @@ img {
 
   .impact-transform-pair {
     grid-template-columns: 1fr;
+  }
+}
+
+/* ==========================================================================
+   Privacy Policy Page Styling
+   ========================================================================== */
+.policy-page-container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 3.5rem 1.5rem 5rem;
+}
+
+.policy-card {
+  background: var(--bg-surface);
+  border-radius: var(--radius-xl);
+  border: 1px solid var(--border-light);
+  box-shadow: var(--shadow-md);
+  padding: 3rem;
+  margin-top: 2.25rem;
+}
+
+.policy-block {
+  margin-bottom: 2.25rem;
+}
+
+.policy-block:last-child {
+  margin-bottom: 0;
+}
+
+.policy-block h3 {
+  font-family: var(--font-sans);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text-heading);
+  margin-bottom: 0.75rem;
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.policy-block h3 i {
+  color: var(--theme-teal);
+  font-size: 1.1rem;
+}
+
+.policy-block p {
+  font-size: 0.98rem;
+  color: var(--text-body);
+  line-height: 1.8;
+  margin-bottom: 0.85rem;
+}
+
+.policy-block ul {
+  list-style: none;
+  padding-left: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin: 0.85rem 0 1rem;
+}
+
+.policy-block ul li {
+  font-size: 0.95rem;
+  color: var(--text-body);
+  line-height: 1.7;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.65rem;
+}
+
+.policy-block ul li i {
+  color: var(--theme-teal);
+  margin-top: 0.35rem;
+  font-size: 0.85rem;
+  flex-shrink: 0;
+}
+
+.policy-highlight-box {
+  background: var(--theme-teal-light);
+  border-left: 4px solid var(--theme-teal);
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+  padding: 1.25rem 1.5rem;
+  margin-bottom: 2.25rem;
+  color: var(--text-heading);
+  font-size: 0.96rem;
+  line-height: 1.7;
+}
+
+@media (max-width: 768px) {
+  .policy-card {
+    padding: 1.75rem 1.25rem;
+    border-radius: var(--radius-lg);
   }
 }
