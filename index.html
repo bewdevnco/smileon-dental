@@ -261,19 +261,20 @@
 
         <div class="experience-section-grid">
 
-          <!-- Left: 4 Gallery Photos -->
+          <!-- Left: Vertical Video Testimonial + Clinic Photos -->
           <div class="experience-gallery-grid reveal-left">
+            <div class="exp-gallery-item exp-video-item">
+              <video src="/assets/kannada_vid_testimonial.mp4" playsinline controls preload="metadata"
+                aria-label="Patient Video Testimonial in Kannada"></video>
+              <div class="exp-video-overlay-tag">
+                <i class="fa-solid fa-play"></i> Patient Story &bull; Kannada
+              </div>
+            </div>
             <div class="exp-gallery-item tall">
               <img src="/assets/clinicinterior.jpeg" alt="Modern Clinic Interior">
             </div>
-            <div class="exp-gallery-item">
-              <img src="/assets/clinicmachine.jpeg" alt="Doctor Gentle Care">
-            </div>
-            <div class="exp-gallery-item">
-              <img src="/assets/clinicmainchair.jpeg" alt="Dental Operatory">
-            </div>
             <div class="exp-gallery-item tall">
-              <img src="/assets/service_veneers.jpg" alt="Cosmetic Shade Guide">
+              <img src="/assets/clinicmainchair.jpeg" alt="Dental Operatory">
             </div>
           </div>
 
@@ -402,101 +403,7 @@
     </section>
 
     <!-- ===================================================================
-         SECTION 4: "Simple options to make your smile special"
-         =================================================================== -->
-    <section class="bg-mint-section">
-      <div class="section-container">
-
-        <div class="section-header text-center reveal-up">
-          <div class="section-tag">Curated Smile Care</div>
-          <h2 class="section-title">Simple Options to Make Your <span class="serif-teal">Smile Special</span></h2>
-          <p class="section-description">
-            Choose from our most requested specialized smile transformations, tailored specifically for your lifestyle
-            and comfort.
-          </p>
-        </div>
-
-        <div class="cards-triplet-grid">
-
-          <!-- Card 1 -->
-          <div class="white-feature-card reveal-up stagger-1">
-            <div class="white-card-img-wrapper">
-              <img src="/assets/patient_smile_1.jpg" alt="Cosmetic Smile Design">
-              <div class="card-badge-floating"><i class="fa-solid fa-sparkles"></i> Most Popular</div>
-            </div>
-            <div class="white-card-body">
-              <div>
-                <h3>Cosmetic Smile Design</h3>
-                <div class="white-card-sub">Porcelain Veneers &amp; Laminates</div>
-                <p>Transform chipped, discolored, or uneven teeth into a radiant, camera-ready smile with digital smile
-                  simulation.</p>
-              </div>
-              <div class="white-card-footer">
-                <a href="/services.html" class="card-learn-link">
-                  Learn More <i class="fa-solid fa-chevron-right"></i>
-                </a>
-                <a href="/booking.html?service=Smile%20Design" class="btn btn-primary"
-                  style="padding: 0.5rem 1.15rem; font-size: 0.85rem;"><i class="fa-solid fa-calendar-check"></i>
-                  Book</a>
-              </div>
-            </div>
-          </div>
-
-          <!-- Card 2 -->
-          <div class="white-feature-card reveal-up stagger-2">
-            <div class="white-card-img-wrapper">
-              <img src="/assets/patient_aligner.jpg" alt="Clear Aligners">
-              <div class="card-badge-floating"><i class="fa-solid fa-eye-slash"></i> Virtually Invisible</div>
-            </div>
-            <div class="white-card-body">
-              <div>
-                <h3>Invisible Clear Braces</h3>
-                <div class="white-card-sub">Custom 3D Digital Aligners</div>
-                <p>Discreetly align crowded or spaced teeth without painful metal brackets. Removable, comfortable, and
-                  seamless.</p>
-              </div>
-              <div class="white-card-footer">
-                <a href="/services.html" class="card-learn-link">
-                  Learn More <i class="fa-solid fa-chevron-right"></i>
-                </a>
-                <a href="/booking.html?service=Invisible%20Clear%20Braces" class="btn btn-primary"
-                  style="padding: 0.5rem 1.15rem; font-size: 0.85rem;"><i class="fa-solid fa-calendar-check"></i>
-                  Book</a>
-              </div>
-            </div>
-          </div>
-
-          <!-- Card 3 -->
-          <div class="white-feature-card reveal-up stagger-3">
-            <div class="white-card-img-wrapper">
-              <img src="/assets/service_whitening.jpg" alt="Laser Teeth Whitening">
-              <div class="card-badge-floating"><i class="fa-solid fa-bolt"></i> Same-Day Results</div>
-            </div>
-            <div class="white-card-body">
-              <div>
-                <h3>Laser Teeth Whitening</h3>
-                <div class="white-card-sub">Brighten Up to 8 Shades</div>
-                <p>Safe in-office professional diode laser whitening restoring pure natural brightness in just 45
-                  minutes.</p>
-              </div>
-              <div class="white-card-footer">
-                <a href="/services.html" class="card-learn-link">
-                  Learn More <i class="fa-solid fa-chevron-right"></i>
-                </a>
-                <a href="/booking.html?service=Laser%20Teeth%20Whitening" class="btn btn-primary"
-                  style="padding: 0.5rem 1.15rem; font-size: 0.85rem;"><i class="fa-solid fa-calendar-check"></i>
-                  Book</a>
-              </div>
-            </div>
-          </div>
-
-        </div>
-
-      </div>
-    </section>
-
-    <!-- ===================================================================
-         SECTION 5: "First time here?"
+         SECTION 4: "First time here?"
          =================================================================== -->
     <section class="bg-white-section">
       <div class="section-container">
@@ -618,40 +525,16 @@
                 style="font-size:0.75rem;"></i></a>
           </div>
 
-          <!-- Dr. Neha Andhare (SVG Placeholder) -->
-          <div class="doctor-mini-card">
-            <div class="doctor-mini-photo">
-              <div class="doctor-mini-svg-placeholder">
-                <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg" class="doctor-avatar-svg">
-                  <circle cx="40" cy="40" r="40" fill="currentColor" fill-opacity="0.12" />
-                  <circle cx="40" cy="28" r="13" fill="currentColor" fill-opacity="0.85" />
-                  <path d="M16 67C16 53.7452 26.7452 43 40 43C53.2548 43 64 53.7452 64 67" fill="currentColor"
-                    fill-opacity="0.85" />
-                  <path d="M34 43L40 52L46 43" stroke="#ffffff" stroke-width="2" stroke-linecap="round" />
-                  <circle cx="40" cy="57" r="2.5" fill="#ffffff" />
-                </svg>
-              </div>
-            </div>
+          <!-- Dr. Neha Andhare (Specialist Details) -->
+          <div class="doctor-mini-card doc-mini-details-only">
             <div class="doctor-mini-name">Dr. Neha Andhare</div>
             <div class="doctor-mini-role">Prosthodontist &amp; FMR Expert</div>
             <a href="/doctors.html" class="doctor-mini-link">Profile <i class="fa-solid fa-chevron-right"
                 style="font-size:0.75rem;"></i></a>
           </div>
 
-          <!-- Dr. Harish Rathi (Senior Clinical Advisor - SVG Placeholder) -->
-          <div class="doctor-mini-card">
-            <div class="doctor-mini-photo advisor-border">
-              <div class="doctor-mini-svg-placeholder advisor">
-                <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg" class="doctor-avatar-svg">
-                  <circle cx="40" cy="40" r="40" fill="currentColor" fill-opacity="0.15" />
-                  <circle cx="40" cy="28" r="13" fill="currentColor" fill-opacity="0.9" />
-                  <path d="M16 67C16 53.7452 26.7452 43 40 43C53.2548 43 64 53.7452 64 67" fill="currentColor"
-                    fill-opacity="0.9" />
-                  <path d="M34 43L40 52L46 43" stroke="#ffffff" stroke-width="2" stroke-linecap="round" />
-                  <circle cx="40" cy="57" r="2.5" fill="#ffffff" />
-                </svg>
-              </div>
-            </div>
+          <!-- Dr. Harish Rathi (Senior Clinical Advisor Details) -->
+          <div class="doctor-mini-card doc-mini-details-only advisor">
             <div class="doctor-mini-name">Dr. Harish Rathi</div>
             <div class="doctor-mini-role advisor-text">Senior Clinical Advisor</div>
             <a href="/doctors.html" class="doctor-mini-link">Profile <i class="fa-solid fa-chevron-right"
