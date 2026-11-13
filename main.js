@@ -90,7 +90,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const currentPath = window.location.pathname.toLowerCase();
   document.querySelectorAll('.nav-links a').forEach(link => {
     const href = (link.getAttribute('href') || '').toLowerCase();
-    if (href === currentPath || (href.endsWith('index.html') && (currentPath === '/' || currentPath === '')) || (currentPath.endsWith(href))) {
+    if (href === currentPath || ((href === '/' || href.endsWith('index.html')) && (currentPath === '/' || currentPath === '' || currentPath.endsWith('index.html'))) || (href !== '/' && currentPath.endsWith(href))) {
       link.classList.add('active');
     }
   });
@@ -387,7 +387,7 @@ document.addEventListener('DOMContentLoaded', () => {
       bookingSuccessModal.classList.remove('active');
       if (bookingWizardForm) bookingWizardForm.reset();
       if (typeof showStep === 'function') showStep(1);
-      window.location.href = '/index.html';
+      window.location.href = '/';
     });
   }
 
