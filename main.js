@@ -391,60 +391,182 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // --- 11. Blog & FAQ Topic Filter & Expand Interaction ---
+  // --- 11. Blog & FAQ Topic Filter, Expand & Deep-Link Interaction ---
   const blogFilterBtns = document.querySelectorAll('.blog-filter-btn');
   const blogCards = document.querySelectorAll('.blog-card');
 
-  if (blogFilterBtns.length > 0 && blogCards.length > 0) {
-    blogFilterBtns.forEach(btn => {
-      btn.addEventListener('click', () => {
-        blogFilterBtns.forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
+  if (blogCards.length > 0) {
+    function setCategoryFilter(filterCategory) {
+      if (blogFilterBtns.length > 0) {
+        blogFilterBtns.forEach(b => {
+          b.classList.toggle('active', b.getAttribute('data-filter') === filterCategory);
+        });
+      }
+      blogCards.forEach(card => {
+        const category = card.getAttribute('data-category');
+        if (filterCategory === 'all' || category === filterCategory) {
+          card.style.display = 'block';
+          card.classList.add('revealed');
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
 
-        const filter = btn.getAttribute('data-filter');
-        blogCards.forEach(card => {
-          const category = card.getAttribute('data-category');
-          if (filter === 'all' || category === filter) {
-            card.style.display = 'block';
-            card.classList.add('revealed');
-          } else {
-            card.style.display = 'none';
-          }
+    if (blogFilterBtns.length > 0) {
+      blogFilterBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          const filter = btn.getAttribute('data-filter') || 'all';
+          setCategoryFilter(filter);
         });
       });
-    });
+    }
+
+    function expandCard(card, expand = true) {
+      const expandBtn = card.querySelector('.blog-expand-btn');
+      const span = expandBtn ? expandBtn.querySelector('span') : null;
+      if (expand) {
+        card.classList.add('is-expanded');
+        if (expandBtn) expandBtn.setAttribute('aria-expanded', 'true');
+        if (span) span.textContent = 'Close Details';
+      } else {
+        card.classList.remove('is-expanded');
+        if (expandBtn) expandBtn.setAttribute('aria-expanded', 'false');
+        if (span) span.textContent = 'Read Details & Doctor Advice';
+      }
+    }
+
+    function toggleCard(card) {
+      const isExpanded = card.classList.contains('is-expanded');
+      expandCard(card, !isExpanded);
+    }
+
+    // Helper: copy question link to clipboard
+    async function copyQuestionLink(anchorId) {
+      const url = `${window.location.origin}${window.location.pathname}#${anchorId}`;
+      try {
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          await navigator.clipboard.writeText(url);
+        } else {
+          const tempInput = document.createElement('input');
+          tempInput.value = url;
+          document.body.appendChild(tempInput);
+          tempInput.select();
+          document.execCommand('copy');
+          document.body.removeChild(tempInput);
+        }
+        showToast('Question link copied to clipboard!', 'success');
+        if (window.history && window.history.pushState) {
+          window.history.pushState(null, '', `#${anchorId}`);
+        }
+      } catch (err) {
+        console.error('Failed to copy link:', err);
+        showToast('Link copied: ' + url, 'info');
+      }
+    }
+
+    // Handle initial hash or hash changes for deep linking
+    function handleHashNavigation(smoothScroll = true) {
+      const hash = window.location.hash.replace('#', '').trim();
+      if (!hash) return;
+      const targetCard = document.getElementById(hash);
+      if (targetCard && targetCard.classList.contains('blog-card')) {
+        // Ensure card is visible even if filtered out
+        const category = targetCard.getAttribute('data-category');
+        const activeBtn = document.querySelector('.blog-filter-btn.active');
+        const currentFilter = activeBtn ? activeBtn.getAttribute('data-filter') : 'all';
+        if (currentFilter !== 'all' && currentFilter !== category) {
+          setCategoryFilter('all');
+        }
+        expandCard(targetCard, true);
+        if (smoothScroll) {
+          setTimeout(() => {
+            targetCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }, 100);
+        }
+      }
+    }
 
     blogCards.forEach(card => {
       const expandBtn = card.querySelector('.blog-expand-btn');
-      const title = card.querySelector('.blog-card-title');
-
-      function toggleCard(e) {
-        if (e) e.preventDefault();
-        const isExpanded = card.classList.contains('is-expanded');
-        
-        if (isExpanded) {
-          card.classList.remove('is-expanded');
-          if (expandBtn) {
-            expandBtn.setAttribute('aria-expanded', 'false');
-            const span = expandBtn.querySelector('span');
-            if (span) span.textContent = 'Read Details & Doctor Advice';
-          }
-        } else {
-          card.classList.add('is-expanded');
-          if (expandBtn) {
-            expandBtn.setAttribute('aria-expanded', 'true');
-            const span = expandBtn.querySelector('span');
-            if (span) span.textContent = 'Close Details';
-          }
-        }
-      }
+      const questionLink = card.querySelector('.blog-question-link');
+      const copyBtn = card.querySelector('.blog-copy-link-btn');
+      const shareBtn = card.querySelector('.blog-share-trigger');
+      const cardId = card.id;
 
       if (expandBtn) {
-        expandBtn.addEventListener('click', toggleCard);
+        expandBtn.addEventListener('click', (e) => {
+          e.preventDefault();
+          toggleCard(card);
+        });
       }
-      if (title) {
-        title.addEventListener('click', toggleCard);
+
+      if (questionLink) {
+        questionLink.addEventListener('click', (e) => {
+          e.preventDefault();
+          toggleCard(card);
+          if (cardId) {
+            if (window.history && window.history.pushState) {
+              window.history.pushState(null, '', `#${cardId}`);
+            } else {
+              window.location.hash = cardId;
+            }
+          }
+        });
       }
+
+      if (copyBtn) {
+        copyBtn.addEventListener('click', (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          const anchor = copyBtn.getAttribute('data-anchor') || cardId;
+          expandCard(card, true);
+          copyQuestionLink(anchor);
+        });
+      }
+
+      if (shareBtn) {
+        shareBtn.addEventListener('click', (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          const anchor = shareBtn.getAttribute('data-anchor') || cardId;
+          expandCard(card, true);
+          copyQuestionLink(anchor);
+        });
+      }
+    });
+
+    // Quick Directory jump links
+    const dirLinks = document.querySelectorAll('.faq-dir-link');
+    dirLinks.forEach(link => {
+      link.addEventListener('click', (e) => {
+        const href = link.getAttribute('href');
+        if (href && href.startsWith('#')) {
+          const targetId = href.substring(1);
+          const targetCard = document.getElementById(targetId);
+          if (targetCard) {
+            e.preventDefault();
+            setCategoryFilter('all');
+            expandCard(targetCard, true);
+            if (window.history && window.history.pushState) {
+              window.history.pushState(null, '', href);
+            } else {
+              window.location.hash = targetId;
+            }
+            targetCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        }
+      });
+    });
+
+    // Run on initial page load if hash present
+    if (window.location.hash) {
+      setTimeout(() => handleHashNavigation(true), 250);
+    }
+
+    // Listen to hash changes (e.g. browser back/forward or external link jumps)
+    window.addEventListener('hashchange', () => {
+      handleHashNavigation(true);
     });
   }
 
